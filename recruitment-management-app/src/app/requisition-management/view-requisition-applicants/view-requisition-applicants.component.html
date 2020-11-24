@@ -1,0 +1,63 @@
+<div class="x_title">
+    <h2>Requisiton Applicants Status</h2>
+    <button type="button" class="btn pull-right" (click)="onDismiss()">
+       X
+       </button>
+    <div class="clearfix"></div>
+</div>
+<div class="x_content">
+    <div class="row text-center">
+        <mat-card *ngFor="let item of Model ; let i = index" style="position: relative;margin-bottom: 10px !important;">
+
+            <mat-card-header style="max-width: 75%;">
+                <div mat-card-avatar class="example-header-image" style="float: left;"></div>
+                <mat-card-title>{{item.applicant.name}}</mat-card-title>
+                <mat-card-content>{{item.applicant.emailAddress}}</mat-card-content>
+                <mat-card-subtitle>{{item.applicant.qualification}}</mat-card-subtitle>
+            </mat-card-header>
+
+
+            <mat-card-actions class="status">
+                <p *ngIf="item.status == 'Rejected'" class="cardbtn blink" style="color: red; font-weight: bold;">{{item.status}}</p>
+                <p *ngIf="item.status == 'Selected'" class="cardbtn blink" style="color: darkgreen; font-weight: bold;">{{item.status}}</p>
+                <p *ngIf="item.status != 'Rejected' && item.status != 'Selected'" class="cardbtn blink" style="color: darkmagenta; font-weight: bold;">{{item.status}}</p>
+            </mat-card-actions>
+
+        </mat-card>
+        &nbsp;
+        <div class="text-center">
+            <table style="margin-left:16px;" class="row applicantDetails">
+                <tr class="form-group">
+                    <th style="width: 50%;font-weight:normal;">
+                        <p><label>Shorlisted Applicants : </label> <span style="margin-left: 33px; display:inline-block">{{ShorlistedApplicants}}</span></p>
+                    </th>
+
+                    <th style="width: 50%;font-weight:normal;">
+                        <p><label>Total Selected Applicants : </label> <span style="margin-left: 8px; display:inline-block">{{SelectedApplicants}}</span></p>
+                    </th>
+
+                </tr>
+                <tr class="form-group">
+
+
+                    <th style="width: 50%;font-weight:normal;">
+                        <p><label> Total Rejected Applicants : </label> <span style="margin-left: 8px; display:inline-block">{{RejectedApplicants}}</span></p>
+                    </th>
+
+
+                    <th style="width: 50%;font-weight:normal;">
+                        <p><label> Applicants InProgress :</label> <span style="margin-left: 29px; display:inline-block">{{InProgressApplicants}}</span></p>
+                    </th>
+
+
+                </tr>
+            </table>
+            <div *ngIf="FinalMessage">
+                <p class="text-left mt-2" style="  margin-top: 20px; font-weight:bold">{{FinalMessage}}</p>
+                <p><button type="button" class="btn btn-success pull-right" (click)="onConfirm()">
+                Close Requisition 
+               </button></p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+1. JD-more description about requisition in creating requisition
+2. Two more fields - mandatory fields and optional fields for skills like primary and secondary
+3. Filter - Fresher Resume
+          -To differentiate resume based on how many times a technical words used Ex:Java
+4. Time slot from an Interviewer to assign an interview.
+5. Change HR feedback form.
+6. Job Market - Publishing in Social Media.
+7.Duplicate Check - email and phone number is done.
+8.bulk upload of resume
+9. Internal Employee Reference - Intimate initial and final interview process to refereed person.
+10.Add Vendor to Internal 
+      Vendor - Two Types 
+       a. Onetime Vendor
+       b. Contract Vendor
+
+Staffing :
+1. Add fields - Contract field -in months
+                Budget and Tier
+2.Dashboard - Give more preference to Internal source
+3.Recruiter Screening
+4. NDA 
+5.Fitment Approval
+6. Different Panels based on Technology based
+7.Need External Panel while looking for candidate in Market.
+
+
+
+
+
+

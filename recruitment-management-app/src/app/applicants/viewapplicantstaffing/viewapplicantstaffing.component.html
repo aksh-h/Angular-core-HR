@@ -1,0 +1,680 @@
+<div id="index" class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Applicant Name: {{ApplicantModel.name}}</h2>
+                <h3 class="pull-right">Applicant Status :
+                    <span class="blink"><b>{{status}}</b></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a type="button" style="width: 80px;" class="btn btn-info pull-right" [routerLink]="['/applicants/shortlistedstaffing']">
+                        Back
+                    </a>
+                </h3>
+
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card-box table-responsive">
+                            <table id="Interviewtable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            &nbsp;
+
+            <mat-accordion *ngIf="from == 'ShortList'" class="example-headers-align" multi>
+                <mat-expansion-panel [expanded]="step === 0" (closed)="setStep(1)" (opened)="setStep(0)">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <label class="label-align"  style="font-size: 15px;">Assign Interview Test</label>
+                            
+                                <!-- <h4 *ngIf="readonlycontrols" class="pull-right" style="margin-left: 55%;">
+                                    <p  style="color: darkblue;">{{message}}</p>
+                                </h4> -->
+                                <div class="clearfix"></div>
+                            
+                        </mat-panel-title>
+                        <mat-panel-description *ngIf="readonlycontrols" style="align-items: flex-end;justify-content: flex-end;">
+                            {{message}}
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div class="clearfix"></div>
+                    <div id="index" class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div>
+                               
+                                <div class="x_content">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+
+                                            <form [formGroup]="InterviewForm"  method="post" >
+
+                                                <div class="x_content text-center">
+
+                                                    <div class="container progressContainer">
+                                                        <span *ngFor="let item of this.Rounds;let i = index">
+                                                            <span class="circle-desc"
+                                                                [class.circle-desc-active]="i < InterviewCount">{{ item }}</span>
+                                                                <span *ngIf="i==1" ></span>
+                                                        <span class="circles" [class.reject]="i == RejectedIndex" *ngIf="i < InterviewCount"></span>
+                                                       
+                                                        <span class="post" [class.active]="i == InterviewCount && RejectedIndex < 0" *ngIf="i >= InterviewCount"></span>
+                                                        <span class="bar" [class.progress]="i != RejectedIndex && i < InterviewCount" *ngIf="(i != this.Rounds.length - 1)"></span>
+                                                        </span>
+                                                    </div>
+
+                                                    
+
+                                                    <div *ngIf="CurrentRoundName != 'Client'" class="form-group" style="margin-bottom: 50px;">
+                                                        <label class="col-form-label col-md-3 col-sm-3 label-align">Panel<span
+                                                                class="required">*</span></label>
+                                                        <div class="col-md-6 col-sm-6">
+                                                            <div [ngClass]="{ 'bad' : isSubmitted && f.panel.errors }">
+                                                                <select name="panels" [attr.disabled]="readonlycontrols ? '' : null" class="form-control" (change)="FilterInterviewers(true)" formControlName="panel" [(ngModel)]="InterviewModel.interviewPanel" placeholder="Interview Panel" >
+                                                                    <option
+                                                                        [attr.disabled]="panel.isEnabled ? '' : null"
+                                                                        *ngFor="let panel of PanelList"
+                                                                        [value]="panel.panelGroupName">
+                                                                        {{panel.panelGroupName}}</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3"></div>
+                                                    </div>
+
+                                                    &nbsp;
+
+                                                    <div *ngIf="CurrentRoundName != 'Client'" class="form-group" style="margin-bottom: 50px;">
+                                                        <label class="col-form-label col-md-3 col-sm-3 label-align">Interviewer<span
+                                                                class="required">*</span></label>
+                                                        <div class="col-md-6 col-sm-6">
+                                                            <div [ngClass]="{ 'bad' : isSubmitted && f.interviewDate.errors }">
+                                                                <ng-multiselect-dropdown *ngIf="readonlycontrols" disabled="true" name="InterviewerDropDownSettings" formControlName="interviewDate" [placeholder]="'Interviewer'" [settings]="InterviewerDropDownSettings" [data]="InterviewerList" [(ngModel)]="InterviewModel.tblInterviewEmployeeMappingStaffing">
+                                                                </ng-multiselect-dropdown>
+                                                                <ng-multiselect-dropdown *ngIf="!readonlycontrols" name="InterviewerDropDownSettings" formControlName="interviewDate" [placeholder]="'Interviewer'" [settings]="InterviewerDropDownSettings" [data]="InterviewerList" [(ngModel)]="InterviewModel.tblInterviewEmployeeMappingStaffing">
+                                                                </ng-multiselect-dropdown>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3"></div>
+                                                    </div>
+
+                                                    &nbsp;
+
+                                                    <div class="form-group" style="margin-bottom: 50px;">
+                                                        <label class="col-form-label col-md-3 col-sm-3 label-align">Interview
+                                                            Date/Time<span class="required">*</span></label>
+                                                        <div class="col-md-6 col-sm-6">
+                                                            <div [ngClass]="{ 'bad' : isSubmitted && f.interviewer.errors }">
+                                                                <input [owlDateTime]="dt1" [readonly]="readonlycontrols" formControlName="interviewer" [owlDateTimeTrigger]="dt1" class="form-control owl-dt-container" [(ngModel)]="InterviewModel.interviewDate" placeholder="Ex: 7/3/2020, 12:30 PM">
+                                                                <owl-date-time #dt1></owl-date-time>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3"></div>
+                                                    </div>
+
+                                                    &nbsp;
+
+                                                    <div *ngIf="CurrentRoundName != 'Client'" class="form-group" style="margin-bottom: 50px;">
+                                                        <label class="col-form-label col-md-3 col-sm-3 label-align">Comments
+                                                            for Interviewer</label>
+                                                        <div class="col-md-6 col-sm-6">
+                                                            <textarea name="comments" [readonly]="readonlycontrols" formControlName="comments" class="form-control" data-validate-length-range="100" [(ngModel)]="InterviewModel.comments" placeholder="Ex: must be good in Database skills" ></textarea>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3"></div>
+                                                    </div>
+                                                    &nbsp;
+                                                    
+                                                   
+                                                    <div class="form-group" style="margin-bottom: 50px;">
+                                                        <label class="col-form-label col-md-3 col-sm-3 label-align">Mode
+                                                            Of Interview</label>
+                                                        <div class="col-md-7 col-sm-7 pull-left">
+                                                            <mat-radio-group  name="moi" formControlName="moi"  [disabled]="readonlycontrols == true ? true : false" [(ngModel)]="InterviewModel.modeOfInterview" aria-label="Select an option">
+                                                                <mat-radio-button (change)="onChange()" name="Telephonic" value="Telephonic">Telephonic
+                                                                </mat-radio-button>
+                                                                <mat-radio-button (change)="onChange()"  value="InternetCall">Internet Call
+                                                                </mat-radio-button>
+                                                                <mat-radio-button (change)="onChange()"   value="InPerson">In Person
+                                                                </mat-radio-button>
+                                                            </mat-radio-group>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3"></div>
+                                                    </div>
+                                                 
+                                                    &nbsp;
+
+                                                    <div *ngIf="InterviewModel.modeOfInterview == 'InPerson'" class="form-group" style="margin-bottom: 50px;">
+                                                        <label class="col-form-label col-md-3 col-sm-3 label-align">Venue</label>
+                                                        <div class="col-md-6 col-sm-6">
+                                                            <textarea  name="comments" [readonly]="readonlycontrols" formControlName="venue" class="form-control" data-validate-length-range="100" [(ngModel)]="InterviewModel.venue" placeholder="Venue" required="required"></textarea>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3">
+                                                            <div [attr.disabled]="readonlycontrols ? '' : null">
+                                                                <mat-accordion (click)="fetchAddress()">
+                                                                    <mat-expansion-panel (opened)="panelOpenState = true" style="width: 88%;" (closed)="panelOpenState = false">
+                                                                        <mat-expansion-panel-header class="panel-expand">
+                                                                            <mat-panel-title>
+                                                                                Pick address
+                                                                            </mat-panel-title>
+                                                                            <div _ngcontent-fit-c161 class="x_title"></div>
+                                                                        </mat-expansion-panel-header>
+                                                                        <span (click)="onSelect('first')">
+                                                                            <a href="javascript:;"> Canarys Unit-1</a><br />
+                                                                        </span>
+                                                                        <div _ngcontent-fit-c161 class="x_title"></div>
+                                                                        <span (click)="onSelect('second')">
+                                                                            <a href="javascript:;"> Canarys Unit-2</a>
+                                                                        </span>
+                                                                    </mat-expansion-panel>
+                                                                </mat-accordion>
+                                                            </div>
+                                                            <a type="button" style="width: 200px;margin-top:10px;" [attr.disabled]="readonlycontrols ? '' : null" class="btn btn-danger pull-left" (click)="OpenGoogleMap()">
+                                                                Select From Google Maps
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div *ngIf="InterviewModel.modeOfInterview == 'InternetCall'" class="form-group" style="margin-bottom: 50px;">
+                                                        <label class="col-form-label col-md-3 col-sm-3 label-align">Call
+                                                            Details</label>
+                                                        <div class="col-md-6 col-sm-6">
+                                                            <textarea  name="comments" [readonly]="readonlycontrols" formControlName="venue" class="form-control" data-validate-length-range="100" [(ngModel)]="InterviewModel.venue" placeholder="Ex : Skype ID : manjunathg351" required="required"></textarea>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3">
+                                                        </div>
+                                                    </div>
+                                                
+                                                    <div *ngIf="InterviewModel.modeOfInterview == 'Telephonic'" class="form-group" style="margin-bottom: 50px;">
+                                                        <label class="col-form-label col-md-3 col-sm-3 label-align">Call
+                                                            Details</label>
+                                                        <div class="col-md-6 col-sm-6">
+                                                            <textarea  name="comments" [readonly]="readonlycontrols" formControlName="venue" class="form-control" data-validate-length-range="100" [(ngModel)]="InterviewModel.venue" placeholder="Ex: 080-23343456" required="required"></textarea>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3">
+                                                        </div>
+                                                    </div>
+                                                    &nbsp;
+                                                    <div *ngIf="CurrentRoundName == 'Client'" class="form-group" style="margin-bottom: 50px;">
+                                                        <label class="col-form-label col-md-3 col-sm-3 label-align">Request Feedback from Customer
+                                                            <span class="required"></span></label>
+                                                        <div class="col-md-3 col-sm-3">
+                                                            <div [ngClass]="{ 'bad' : isSubmitted && f.sendFeedbacktoClient.errors }">
+                                                                <input  class="container" type="checkbox" [readonly]="readonlycontrols" (change)="checkboxchange(feed)" name="sendFeedbacktoClient" formControlName="sendFeedbacktoClient"  class="form-control owl-dt-container" [(ngModel)]="feed" placeholder="">
+                                                                
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3"></div>
+                                                    </div>
+
+                                                    &nbsp;
+                                                  
+                                                   
+                                                    
+                                                   
+
+                                                    &nbsp; &nbsp; &nbsp;
+                                                    <div class="col-md-12 col-sm-12 text-center">
+                                                        <input type="button" (click)="onSubmit()" [attr.disabled]="readonlycontrols ? '' : null" value="Submit" style="width: 80px; margin-top: 10px;" class="btn btn-primary" />
+                                                        <div class="feedbackform" *ngIf="EnableClientFeedBack"  class="form-group" style="margin-bottom: 50px;">                                                        
+                                                         <button type="button" (click)="FeedBack()" class="btn btn-primary" style="float: right;">FeedBack</button>                                                                                                                         <!-- <div class="col-md-3 col-sm-3">                                                             </div> -->                                                         </div>
+                                                        <input type="button" (click)="CancelReschedule()" *ngIf="reschedule" value="Cancel Reschedule" style="width: 150px;" class="btn btn-danger" />
+                                                    </div>
+                                                    &nbsp; &nbsp;&nbsp; &nbsp;
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </mat-expansion-panel>
+            </mat-accordion>
+
+            &nbsp;
+
+            <mat-accordion *ngIf="from == 'ShortList'" class="example-headers-align" multi>
+                <mat-expansion-panel ><!--[expanded]="step === 4"-->
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <label class="label-align" style="font-size: 15px;">Applicant Actions</label>
+                        </mat-panel-title>
+                        <mat-panel-description *ngIf="readonlycontrols" style="align-items: flex-end;justify-content: flex-end;">
+                            {{finalmessage}}
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+
+                    <div class="clearfix"></div>
+                    <div id="index" class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div>
+                                <div class="x_title">
+                                    <!-- <h4 *ngIf="readonlyFinalcontrols" class="pull-right">
+                                        <p style="color: darkblue;">{{finalmessage}}</p>
+                                    </h4> -->
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+
+                                            <div class="form-group btmSpace">
+                                                <label class="col-form-label col-md-3 col-sm-3 label-align">Applicant
+                                                    Status :</label>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <div [ngClass]="{ 'bad' : isSubmitted && !ApplicantRequisition.status }">
+                                                        <mat-radio-group [disabled]="readonlyFinalcontrols == true ? true : false" (change)="FinalStatusChange()" [(ngModel)]="ApplicantRequisition.status" aria-label="Select an option">
+                                                            <mat-radio-button value="Selected">Selected
+                                                            </mat-radio-button>
+                                                            <mat-radio-button value="Rejected">Rejected
+                                                            </mat-radio-button>
+                                                            <mat-radio-button value="BlackList">Blacklist
+                                                            </mat-radio-button>
+                                                        </mat-radio-group>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 col-sm-3"></div>
+                                            </div>
+                                            &nbsp;
+                                            <div class="form-group btmSpace">
+                                                <label class="col-form-label col-md-3 col-sm-3 label-align">Current CTC
+                                                    (lakh)<span class="required">*</span> :</label>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <div [ngClass]="{ 'bad' : isSubmitted && !ApplicantRequisition.currentCtc && this.ApplicantRequisition.status == 'Selected' }">
+                                                        <input type="number" [readonly]="readonlyFinalcontrols" class="form-control" [(ngModel)]="ApplicantRequisition.currentCtc" placeholder="Ex: 4" required="required">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 col-sm-3"></div>
+                                            </div>
+                                            &nbsp;
+                                            <div class="form-group btmSpace">
+                                                <label class="col-form-label col-md-3 col-sm-3 label-align">Expected CTC
+                                                    (lakh)<span class="required">*</span> :</label>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <div [ngClass]="{ 'bad' : isSubmitted && !ApplicantRequisition.expectedCtc && this.ApplicantRequisition.status == 'Selected' }">
+                                                        <input type="number" [readonly]="readonlyFinalcontrols" class="form-control" [(ngModel)]="ApplicantRequisition.expectedCtc" placeholder="Ex: 4" required="required">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 col-sm-3"></div>
+                                            </div>
+                                            &nbsp;
+                                            <div class="form-group btmSpace">
+                                                <label class="col-form-label col-md-3 col-sm-3 label-align">Negotiated
+                                                    CTC (lakh)<span class="required">*</span> :</label>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <div [ngClass]="{ 'bad' : isSubmitted && !ApplicantRequisition.negotiatedCtc && this.ApplicantRequisition.status == 'Selected' }">
+                                                        <input type="number" [readonly]="readonlyFinalcontrols" class="form-control" [(ngModel)]="ApplicantRequisition.negotiatedCtc" placeholder="Ex: 4" required="required">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 col-sm-3"></div>
+                                            </div>
+                                            &nbsp;
+                                            <div class="form-group btmSpace">
+                                                <label class="col-form-label col-md-3 col-sm-3 label-align">Tentative
+                                                    Joining Date<span class="required">*</span> :</label>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <div [ngClass]="{ 'bad' : isSubmitted && !ApplicantRequisition.tentativeJoiningDate && this.ApplicantRequisition.status == 'Selected' }">
+                                                        <input type="date" [readonly]="readonlyFinalcontrols" class="form-control" [(ngModel)]="ApplicantRequisition.tentativeJoiningDate" placeholder="Ex: 7/3/2020, 12:30 PM">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 col-sm-3"></div>
+                                            </div>
+                                            &nbsp;
+                                            <div class="form-group btmSpace">
+                                                <label class="col-form-label col-md-3 col-sm-3 label-align">Tentative
+                                                   Onboarding Date<span class="required">*</span> :</label>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <div [ngClass]="{ 'bad' : isSubmitted && !ApplicantRequisition.tentativeOnBoardingDate && this.ApplicantRequisition.status == 'Selected' }">
+                                                        <input type="date" [readonly]="readonlyFinalcontrols" class="form-control" [(ngModel)]="ApplicantRequisition.tentativeOnBoardingDate" placeholder="Ex: 7/3/2020, 12:30 PM">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 col-sm-3"></div>
+                                            </div>
+                                            &nbsp;
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group btmSpace">
+                                                        <label class="col-form-label col-md-3 col-sm-3 label-align">Remarks
+                                                            :</label>
+                                                        <div class="col-md-6 col-sm-6">
+                                                            <div [ngClass]="{ 'bad' : isSubmitted && !ApplicantRequisition.recruiterComment }">
+                                                                <textarea name="feedback" [readonly]="readonlyFinalcontrols && readonlyFinalcontrols2" style="height: 100px ;" class="form-control" [(ngModel)]="ApplicantRequisition.recruiterComment" placeholder="Good technical skills but poor communication" required="required"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            &nbsp;
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="text-center">
+                                                        <button type="submit" style="width: 80px;" [disabled]="readonlyFinalcontrols" (click)="ChangeApplicantStatus()" class="btn btn-primary">Save</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </mat-expansion-panel>
+            </mat-accordion>
+            &nbsp;
+            <mat-accordion *ngIf="from == 'Selected'" class="example-headers-align" multi>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <label class="label-align" style="font-size: 15px;">Selected applicants Action</label>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="clearfix"></div>
+                    <div id="index" class="row">
+                        <div class="col-md-12 col-sm-12">
+                            
+                               
+                                <div class="x_content">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                         <form [formGroup]="SelectedForm"  method="post" >
+                                            <div class="x_content text-center">
+                                                <div class="form-group btmSpace">
+                                                   <label class="col-form-label col-md-3 col-sm-3 label-align">Applicant
+                                                    Joined ? :</label>
+                                                   <div class="col-md-6 col-sm-6">
+                                                     <!-- <div [ngClass]="{ 'bad' : isSubmitted && !SelectedApplicantsStaffing.applicantJoining }"> --> 
+                                                        <!-- <mat-radio-group [disabled]="readonlyFinalcontrols == true ? true : false" (change)="SelectedApplicants()" [(ngModel)]="SelectedApplicantsModel.applicantJoining" aria-label="Select an option"> -->
+                                                       <mat-radio-group name="applicantJoining" formControlName="applicantJoining" [(ngModel)]="SelectedApplicantsModel.applicantJoining" aria-label="Select an option">
+                                                            <mat-radio-button value="Yes">Yes
+                                                            </mat-radio-button>
+                                                            <mat-radio-button value="No">No
+                                                            </mat-radio-button>
+                            
+                                                        </mat-radio-group> 
+                                                     <!-- </div>  -->
+                                                    </div>
+                                                   <div class="col-md-3 col-sm-3"></div>
+                                                </div>  
+                                                &nbsp;
+                                            
+                                                <div class="form-group btmSpace">
+                                                   <label class="col-form-label col-md-3 col-sm-3 label-align">Joined 
+                                                    Date<span>*</span> :</label>
+                                                    <div class="col-md-6 col-sm-6">
+                                                       <!-- <div [ngClass]="{ 'bad' : isSubmitted && !SelectedApplicantsStaffing.joineddate && this.SelectedApplicantsStaffing.status == 'Selected' }"> -->
+                                                        <input  name="joinedDate" formControlName="joinedDate" type="date"  class="form-control" [(ngModel)]="SelectedApplicantsModel.joinedDate" placeholder="Ex: 4" required="required">
+                                                       <!-- <input type="text" name="joinedDate" formControlName="joinedDate" [(ngModel)]="SelectedApplicantsModel.joinedDate"> -->
+                                                        <!-- </div> -->
+                                                    </div>
+                                                   
+                                                   <div class="col-md-3 col-sm-3"></div>
+                                                </div>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                                <div class="form-group btmSpace">
+                                                    <label class="col-form-label col-md-3 col-sm-3 label-align">IsOnboarded ?
+                                                     :</label>
+                                                    <div class="col-md-6 col-sm-6">
+                                                        <!-- <div [ngClass]="{ 'bad' : isSubmitted && !SelectedApplicantsStaffing.isonboarded }"> -->
+                                                        <!-- <mat-radio-group [disabled]="readonlyFinalcontrols == true ? true : false" (change)="SelectedApplicants()" [(ngModel)]="SelectedApplicantsModel.isOnboarded" aria-label="Select an option"> -->
+                                                        <mat-radio-group name="isOnboarded" formControlName="isOnboarded" [(ngModel)]="SelectedApplicantsModel.isOnboarded" aria-label="Select an option">
+                                                            <mat-radio-button value="Yes">Yes
+                                                            </mat-radio-button>
+                                                            <mat-radio-button value="No">No
+                                                            </mat-radio-button>
+                            
+                                                        </mat-radio-group>
+                                                    </div> 
+                                                </div>
+                                                   <div class="col-md-3 col-sm-3"></div>
+                                                
+                                                &nbsp;
+                                            
+                                                <div class="form-group btmSpace">
+                                                    <label class="col-form-label col-md-3 col-sm-3 label-align">ClientOnboarded
+                                                   Date<span class="required">*</span> :</label>
+                                                    <div class="col-md-6 col-sm-6">
+                                                       <!-- <div [ngClass]="{ 'bad' : isSubmitted && !SelectedApplicantsStaffing.clientOnboardingDate' }"> -->
+                                                        <input name="clientOnboardingDate" formControlName="clientOnboardingDate" type="date" class="form-control" [(ngModel)]="SelectedApplicantsModel.clientOnboardingDate" placeholder="Ex: 4" required="required">
+                                                       <!-- </div> -->
+                                                   </div>
+                                                   <div class="col-md-3 col-sm-3"></div>
+                                                </div>
+                                                &nbsp;
+                                                <div class="row">
+                                                  <div class="col-sm-12">
+                                                    <div class="text-center">
+                                                        <input type="button" (click)="SelectedSubmit()" [attr.disabled]="readonlySelectedcontrols ? '' : null" value="Submit" style="width: 80px; margin-top: 10px;" class="btn btn-primary" />
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                            
+                                    </div>
+                                        
+                                        
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+            &nbsp;
+            <!-- <mat-accordion *ngIf="from == 'Selected'" class="example-headers-align" multi>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            
+                            <label class="label-align" style="font-size: 15px;">Salary Breakage</label>
+                                
+                                
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="clearfix"></div>
+                    <div id="index" class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="x_content">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                         <form [formGroup]="SelectedForm"  method="post" >
+                                            <div class="x_content text-center">
+                                                
+                                                <div class="form-group btmSpace">
+                                                    <input class="btn btn-dark ng-hide pull-right" id="input-file-id" multiple type="file" />
+                                                   <div class="col-md-3 col-sm-3"></div>
+                                                </div>
+                                                &nbsp;
+                                               
+                                                <table class="table table-bordered" id="grid">
+                                                    
+                                                <thead>
+                                                    <tr>
+                                                        <th colspan="3" style="text-align: center;">
+                                                            INCOME
+                                                        </th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Fixed Allowences</th>
+                                                        <th>Permonth</th>
+                                                        <th>Annual</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        
+                                                        <td>Basic</td>
+                                                        <td> <input type="text" name="Provident Fund" required minlength="2">
+                                                        </td>
+                                                     <td>
+                                                        300000 </td>
+                                                     </tr>
+                                                    <tr>
+                                                       <td>House Rent allowences</td>
+                                                      <td>10000</td>
+                                                      <td>120000</td>
+                                                    </tr>
+                                                    <tr>
+                                                      <td>Conveyance</td>
+                                                      <td>7500.00</td>
+                                                      <td>90000.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Medical Allowence</td>
+                                                        <td> <input type="text" name="Provident Fund" required minlength="2">
+                                                        </td>
+                                                     <td>15000.00</td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td>Medi Claim</td>
+                                                        <td> <input type="text" name="Provident Fund" required minlength="2">
+                                                        </td>
+                                                     <td>11400
+                                                     </td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td><b>Variable Allowences</b></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td>others</td>
+                                                        <td>883.00</td>
+                                                        <td>10596.00</td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td>Project Allowence</td>
+                                                        <td> <input type="text" name="Provident Fund" required minlength="2">
+                                                        </td>
+                                                     <td>
+108000                                                     </td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td>PF Employer Contribution</td>
+                                                        <td>3000.00</td>
+                                                        <td>36000.00</td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td>Gratuity</td>
+                                                        <td>750.00</td>
+                                                        <td>9000.00</td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td><b>Total C Package</b></td>
+                                                        <td><b>58333.00</b></td>
+                                                        <td><b>700000.00</b></td>
+                                                      </tr>
+                                                    <tr>
+                                                        <td colspan="3" style="text-align: center;">
+                                                           <b> DEDUCTION </b>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th>Permonth </th>
+                                                         <th>Annual</th>
+                                                      </tr>
+                                                      <tr>
+                                                        <td>Provident Fund</td>
+                                                        <td>3000.00</td>
+                                                        <td>36000.00</td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td>PT- As Applicable</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td>IncomeTax- As Applicable</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td>Medi Claim</td>
+                                                        <td>950.00</td>
+                                                        <td>11400.00</td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td><b>Total Deductions</b></td>
+                                                        <td><b>3950.00</b></td>
+                                                        <td><b>47400.00</b></td>
+                                                      </tr>
+                                                </tbody>
+                                                  </table>
+                                            </div>
+                                        </form>
+                                            
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+            &nbsp; -->
+               
+            <mat-accordion *ngIf="from == 'Selected'" class="example-headers-align" multi>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <label class="label-align" style="font-size: 15px;">Salary Breakup</label>
+                        </mat-panel-title>
+                        <mat-panel-description style="align-items: flex-end;justify-content: flex-end;">
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div class="form-group btmSpace">
+                        <input class="btn btn-dark ng-hide pull-right" id="input-file-id" multiple type="file" />
+                       <div class="col-md-3 col-sm-3"></div>
+                    </div>
+                    &nbsp; 
+                    <div id="index" class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <table class="table table-striped table-bordered">
+                                <tbody>
+                                <tr id="tr_{{i + 1}}" *ngFor="let item of SelectedSalaryTemplate.Rows;let i = index">
+                                    <td>
+                                        {{item.ColumnA.Value}}
+                                    </td>
+                                    <td style="font-weight: bold;" *ngIf="item.ColumnB.IsBold || item.ColumnB.HasFormula">
+                                        <p id="B{{i + 1}}">{{item.ColumnB.Value}}</p>
+                                    </td>
+                                    <td *ngIf="!item.ColumnB.IsBold && !item.ColumnB.HasFormula">
+                                        <input type="number" id="B{{i + 1}}" (change)="DoCalculation('B',(i+1))" value="{{item.ColumnB.Value}}">
+                                    </td>
+                                    <td style="font-weight: bold;" *ngIf="item.ColumnC.IsBold || item.ColumnC.HasFormula">
+                                        <p id="C{{i + 1}}"> {{item.ColumnC.Value}}</p>
+                                    </td>
+                                    <td *ngIf="!item.ColumnC.IsBold && !item.ColumnC.HasFormula">
+                                        <input type="number" id="C{{i + 1}}" (change)="DoCalculation('C',(i+1))" value="{{item.ColumnC.Value}}">
+                                    </td>
+                                </tr>
+                                <tbody>
+                            </table>
+                            <div class="text-center">
+                                <span style="margin-left:100px;"><button class="btn btn-primary" type="submit">Submit</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+    </div>
+</div>
+
+<div class="spin" *ngIf="loader">
+    <mat-spinner class="custom-spinner-color"></mat-spinner>
+</div>
+

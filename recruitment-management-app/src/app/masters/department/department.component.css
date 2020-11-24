@@ -1,0 +1,27 @@
+.label-align {
+    margin-top: 5px;
+}
+
+div.centered {
+    height: 50px;
+    position: fixed;
+    top: calc(30% - 25px);
+    left: calc(30% - 50px);
+}
+
+.mat-spinner {
+    position: -webkit-sticky;
+    margin-left: 50%;
+    margin-right: 50%;
+}
+
+.custom-spinner-color {
+    stroke: #234188;
+}
+
+.spin {
+    position: absolute;
+    left: 43%;
+    top: 40%;
+    z-index: 99;
+}

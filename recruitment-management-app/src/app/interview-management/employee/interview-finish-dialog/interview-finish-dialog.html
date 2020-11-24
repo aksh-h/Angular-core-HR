@@ -1,0 +1,104 @@
+<!-- <div class="fullscreen-container"> -->
+<div mat-dialog-content>
+    <h1 class="pull-left" style="margin-bottom: 2px;" mat-dialog-title>{{title}}</h1>
+    <div class="row" data-backdrop="static">
+        <div class="col-md-12 col-sm-12">
+            <span layout="row"><hr flex/></span>
+            <div class="x_panel ">
+                <div class="col-md-12 padding_zero">
+                    <div class="form-group">
+                        <label class="col-form-label col-sm-3 label-align pull-left">Applicant Status:</label>
+                        <div class="col-md-9">
+                            <div [ngClass]="{ 'radiobad' : isSubmitted && !Model.status }">
+                                <mat-radio-group [disabled]="readonlycontrols == true ? true : false " [(ngModel)]="Model.status" aria-label="Select an option">
+                                    <mat-radio-button style="margin-right: 15px" value="Selected">Selected</mat-radio-button>
+                                    <mat-radio-button style="margin-right: 15px" value="Rejected">Rejected</mat-radio-button>
+                                    <mat-radio-button style="margin-right: 15px" value="Hold">Hold</mat-radio-button>
+                                    <mat-radio-button value="BlackList">Blacklist</mat-radio-button>
+                                </mat-radio-group>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                &nbsp;
+                <div class="col-md-12 padding_zero">
+                    <div class="form-group">
+                        <label class="col-form-label col-sm-3 label-align pull-left">Marks:</label>
+                        <div class="col-md-9 col-sm-9" style="margin-bottom:20px">
+                            <table class="feedback" style="border: 1px solid #ccc;">
+                                <tr>
+                                    <th> Skill</th>
+                                    <th> Score</th>
+                                </tr>
+                                <tbody>
+                                    <tr *ngFor="let skills of Model.applicantRequisition.requisition.tblRequisitionSkillMapping; let i = index">
+                                        <td>{{skills.skill.skillName}}</td>
+                                        <td><input [readonly]="readonlycontrols" (keyup)="maxLengthCheck(i)" [(ngModel)]="skills.skill.skillRating" max="10" min="0" maxlength="2" type="number"> </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 padding_zero">
+                    <div class="form-group" style="margin-bottom: 10px;">
+                        <label class="col-form-label col-sm-3 label-align pull-left">Communication:</label>
+                        <div class="col-md-9 col-sm-9">
+                            <mat-radio-group [disabled]="readonlycontrols == true ? true : false " [(ngModel)]="Model.communication" aria-label="Select an option">
+                                <mat-radio-button style="margin-right: 15px" [value]="1">Excellent</mat-radio-button>
+                                <mat-radio-button style="margin-right: 15px" [value]="2">Good</mat-radio-button>
+                                <mat-radio-button style="margin-right: 15px" [value]="3">Average</mat-radio-button>
+                                <mat-radio-button [value]="4">Poor</mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 padding_zero">
+                    <div class="form-group">
+                        <label class="col-form-label col-sm-3 label-align pull-left">Attitude:</label>
+                        <div class="col-md-9 col-sm-9">
+                            <mat-radio-group [disabled]="readonlycontrols == true ? true : false " [(ngModel)]="Model.attitude" aria-label="Select an option">
+                                <mat-radio-button style="margin-right: 15px" [value]="1">Excellent</mat-radio-button>
+                                <mat-radio-button style="margin-right: 15px" [value]="2">Good</mat-radio-button>
+                                <mat-radio-button style="margin-right: 15px" [value]="3">Average</mat-radio-button>
+                                <mat-radio-button [value]="4">Poor</mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                    </div>
+                </div>
+                &nbsp;
+
+                <div class="col-md-12 padding_zero">
+                    <div class="form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align">Feed Back:</label>
+                        <div class="col-md-6 col-sm-6">
+                            <div [ngClass]="{ 'bad' : isSubmitted && !Model.feedBack }">
+                                <textarea [readonly]="readonlycontrols" name="feedback" style="width: 163%; height: 100px ;" class="form-control" [(ngModel)]="Model.feedBack" placeholder="Ex: Good Technical skills" required="required"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-3"></div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 padding_zero">
+                    <div  class="form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align">Recruiters Feed Back:</label>
+                        <div  class="col-md-6 col-sm-6">
+                            <div [ngClass]="{ 'bad' : isSubmitted && !Model.recruitersFeedBack }">
+                                <textarea [readonly]="readonlyclients" name="recruitersFeedBack" style="width: 163%; height: 100px ;" class="form-control" [(ngModel)]="Model.recruitersFeedBack" placeholder="Ex: Good Technical skills" required="required"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-3"></div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<span layout="row"><hr flex/></span>
+<div mat-dialog-actions style="margin-left: 95px;">
+    <button type="button" (click)="onConfirm()" *ngIf="!readonlycontrols" style="width: 80px;" class="btn btn-info pull-right" data-dismiss="modal">Submit</button>
+    <button type="button" (click)="onDismiss()" style="width: 80px;" class="btn btn-danger pull-right" data-dismiss="modal">Cancel</button>
+</div>

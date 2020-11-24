@@ -1,0 +1,169 @@
+.blink {
+    text-align: center;
+    color: green;
+    animation: blink 1s linear infinite;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: .5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.mat-spinner {
+    position: -webkit-sticky;
+    margin-left: 50%;
+    margin-right: 50%;
+}
+
+.custom-spinner-color {
+    stroke: #234188;
+}
+
+.spin {
+    position: absolute;
+    left: 43%;
+    top: 40%;
+    z-index: 99;
+}
+
+.circles {
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    display: inline-block;
+    background-color: darkgreen;
+}
+
+.reject {
+    background-color: red;
+}
+
+.active {
+    background-color: orange;
+}
+
+.post {
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    display: inline-block;
+    border: 1px solid black;
+}
+
+.circle-desc-active {
+    font-weight: bold;
+}
+
+.bar {
+    width: 16%;
+    height: 0.063em;
+    margin-bottom: 0.469em;
+    border: 0.031em solid #cfcece;
+    color: #000;
+    background-color: #000;
+    display: inline-block;
+    text-align: center;
+    margin: "0 auto";
+}
+
+.progress {
+    border: 0.031em solid darkgreen;
+}
+
+.container {
+    min-width: 320px;
+    margin: "0px auto";
+    text-align: center;
+}
+
+.circle-desc {
+    position: absolute;
+    top: 22px;
+    font-size: 1.125em;
+    width: auto;
+    max-width: 9.375em;
+    margin-left: 0;
+    color: #73879C;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+.message{
+    text-align: right;
+}
+.progressContainer {
+    position: relative;
+    height: 65px;
+}
+
+@media only screen and (max-width: 320px) {
+    body {
+        font-size: 20%
+    }
+}
+
+
+/*extra small devices*/
+
+@media only screen and (max-width: 600px) {
+    body {
+        font-size: 40%
+    }
+}
+
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+
+@media only screen and (min-width: 600px) {
+    body {
+        font-size: 60%
+    }
+}
+
+
+/* Medium devices (landscape tablets, 768px and up) */
+
+@media only screen and (min-width: 768px) {
+    body {
+        font-size: 80%
+    }
+}
+
+
+/* Large devices (laptops/desktops, 992px and up) */
+
+@media only screen and (min-width: 992px) {
+    body {
+        font-size: 100%
+    }
+}
+
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+
+@media only screen and (min-width: 1200px) {
+    body {
+        font-size: 120%
+    }
+}
+
+.btmSpace {
+    margin-bottom: 25px !important;
+}
+
+.mat-radio-button {
+    margin-right: 14% !important;
+}
+
+.owl-dt-container {
+    font-size: 16px !important;
+}
+
+.panel-expand {
+    height: 26px !important;
+}

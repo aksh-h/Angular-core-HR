@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>RecruitmentManagementDB</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{7d95c052-cde9-41db-a378-0df643632c5d}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>RecruitmentManagementDB</RootNamespace>
+    <AssemblyName>RecruitmentManagementDB</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\tbl_WorkFlowMaster.sql" />
+    <Build Include="dbo\Tables\tbl_Vendors.sql" />
+    <Build Include="dbo\Tables\tbl_VendorContacts.sql" />
+    <Build Include="dbo\Tables\tbl_States.sql" />
+    <Build Include="dbo\Tables\tbl_SkillMaster.sql" />
+    <Build Include="dbo\Tables\tbl_SelectedApplicants_Staffing.sql" />
+    <Build Include="dbo\Tables\tbl_SelectedApplicants.sql" />
+    <Build Include="dbo\Tables\tbl_RoleMaster.sql" />
+    <Build Include="dbo\Tables\tbl_RequisitionSkillMapping_Staffing.sql" />
+    <Build Include="dbo\Tables\tbl_RequisitionSkillMapping.sql" />
+    <Build Include="dbo\Tables\tbl_RequisitionRecruiterMapping_Staffing.sql" />
+    <Build Include="dbo\Tables\tbl_RequisitionRecruiterMapping.sql" />
+    <Build Include="dbo\Tables\tbl_RequisitionClientContactMapping_Staffing.sql" />
+    <Build Include="dbo\Tables\tbl_Requisition_Staffing.sql" />
+    <Build Include="dbo\Tables\tbl_Requisition.sql" />
+    <Build Include="dbo\Tables\tbl_QualificationMaster.sql" />
+    <Build Include="dbo\Tables\tbl_PanelGroupMaster.sql" />
+    <Build Include="dbo\Tables\tbl_NoticePeriodMaster.sql" />
+    <Build Include="dbo\Tables\tbl_LoginClient.sql" />
+    <Build Include="dbo\Tables\tbl_Login.sql" />
+    <Build Include="dbo\Tables\tbl_LocationMaster.sql" />
+    <Build Include="dbo\Tables\tbl_JobTypeMaster.sql" />
+    <Build Include="dbo\Tables\tbl_InterviewManagement_Staffing.sql" />
+    <Build Include="dbo\Tables\tbl_InterviewManagement.sql" />
+    <Build Include="dbo\Tables\tbl_InterviewEmployeeMappingStaffing.sql" />
+    <Build Include="dbo\Tables\tbl_InterviewEmployeeMapping.sql" />
+    <Build Include="dbo\Tables\tbl_GMapMaster.sql" />
+    <Build Include="dbo\Tables\tbl_Employees.sql" />
+    <Build Include="dbo\Tables\tbl_EmployeePanelMapping.sql" />
+    <Build Include="dbo\Tables\tbl_DesignationMaster.sql" />
+    <Build Include="dbo\Tables\tbl_DepartmentMaster.sql" />
+    <Build Include="dbo\Tables\tbl_Countries.sql" />
+    <Build Include="dbo\Tables\tbl_ClientsContactDetails.sql" />
+    <Build Include="dbo\Tables\tbl_Clients.sql" />
+    <Build Include="dbo\Tables\tbl_Cities.sql" />
+    <Build Include="dbo\Tables\tbl_Applicants.sql" />
+    <Build Include="dbo\Tables\tbl_ApplicantRequisition_Staffing.sql" />
+    <Build Include="dbo\Tables\tbl_ApplicantRequisition_Client.sql" />
+    <Build Include="dbo\Tables\tbl_ApplicantRequisition.sql" />
+    <Build Include="dbo\Tables\tbl_ApplicantActiveMaster.sql" />
+  </ItemGroup>
+</Project>

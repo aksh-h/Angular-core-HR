@@ -1,0 +1,32 @@
+After cmd command :
+npm install @angular/cli
+ng new test
+
+ng s --o
+
+Commands used :
+ng add @angular/material
+npm install gentelella --save
+npm i ng-dialog-animation
+npm install angular-web-storage --save
+npm install --save @ng-bootstrap/ng-bootstrap
+ npm install @agm/core --save
+npm i ng-pick-datetime
+npm i ng5-slider
+npm install --save-dev @types/googlemaps
+ 
+
+
+table applicants--table crud operation
+applicant.dal-- new metod  write inside region applicant
+private static saveApplications(tblApplicants tblapplicants)
+{
+dbContext.TblAppictions.Add(tblappplicants);
+return dbContext.SaveChanges();
+}
+
+duplicate validation
+
+
+	
+

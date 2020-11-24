@@ -1,0 +1,78 @@
+<div id="listrequisition">
+    <div class="x_title">
+        <h2>Requisition List</h2>
+        <!-- <div class="pull-right" style="color:blue;font-size: 16px; font-weight: bold;">{{Model.Type}} Requisitions</div> -->
+        <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card-box table-responsive">
+                    <table id="Requisitiontable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                    </table>
+                </div>
+            </div>
+        </div>
+        <span layout="row"><hr flex/></span>
+        <div mat-dialog-actions style="margin-left: 95px;">
+            <button type="button" (click)="onDismiss()" style="width: 80px;" class="btn btn-info pull-right" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+</div>
+
+<div id="viewSelectedModel" style="display: none;" role="dialog" data-keyboard="false" data-backdrop="static" class="pop-up-abs">
+    <h1 mat-dialog-title>
+        {{title}}
+        <div class="pull-right"><small> Status :
+                <span class="blink"><b>{{SelectedModel.status}}</b></span></small>
+        </div>
+    </h1>
+    <span layout="row"><hr flex/></span>
+    <div mat-dialog-content>
+
+        <table class="row">
+            <tr class="form-group">
+                <th>Requisition Title :</th>
+                <td>{{SelectedModel.title}}</td>
+
+                <th>Department :</th>
+                <td>{{SelectedModel.department.department}}</td>
+            </tr>
+            <tr class="form-group">
+                <th>Skills :</th>
+                <td>{{SelectedModel.SkillsText}}</td>
+
+                <th>Designation :</th>
+                <td>{{SelectedModel.designation.designation}}</td>
+
+            </tr>
+            <tr class="form-group">
+                <th>Years Of Experience :</th>
+                <td>{{SelectedModel.yearsofExperience}}</td>
+
+                <th>Joining Tenure :</th>
+                <td>{{SelectedModel.joiningTenure}}</td>
+            </tr>
+            <tr class="form-group">
+
+                <th>No Of Positions :</th>
+                <td>{{SelectedModel.noofPositions}}</td>
+
+                <th>Location :</th>
+                <td>{{SelectedModel.location}}</td>
+            </tr>
+            <tr class="form-group">
+                <th>Comments :</th>
+                <td>{{SelectedModel.comments}}</td>
+
+                <th>Manager Comments :</th>
+                <td>{{SelectedModel.managerComments}}</td>
+            </tr>
+        </table>
+
+    </div>
+    <span layout="row"><hr flex/></span>
+    <div mat-dialog-actions style="margin-left: 95px;">
+        <button type="button" (click)="HideView()" style="width: 80px;" class="btn btn-info pull-right" data-dismiss="modal">Close</button>
+    </div>
+</div>

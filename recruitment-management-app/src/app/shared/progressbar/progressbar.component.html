@@ -1,0 +1,20 @@
+<div class="container x_panel">
+    <div class="x_title">
+        <h3 style="font-weight: bold;">{{ title }}</h3>
+        <div class="clearfix"></div>
+    </div>
+    &nbsp; &nbsp; &nbsp;
+    <div class="progressContainer" *ngFor="let obj of items;let i = index">
+        <span *ngFor="let item of obj.workFlowJson;let i = index">
+       <span class="circle-desc" [class.circle-desc-active]="true">{{ item }}</span>
+        <span class="circles" [class.active]="true"></span>
+        <span class="bar" *ngIf="(i != obj.workFlowJson.length - 1)"></span>
+        </span>
+
+        <button (click)="onConfirm(obj.workFlowName,obj.workFlowJson)" class="btn btn-primary pull-right">Select</button>
+    </div>
+
+</div>
+<div class="text-center">
+    <button (click)="onDismiss()" class="btn btn-danger">Cancel</button>
+</div>

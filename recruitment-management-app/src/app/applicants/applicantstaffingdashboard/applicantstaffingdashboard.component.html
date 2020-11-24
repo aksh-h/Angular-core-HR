@@ -1,0 +1,183 @@
+<div id="index" class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Applicant Staffing DashBoard</h2>
+                <!-- <div class="pull-right" style="padding-top: 10px;">
+                    <mat-radio-group [(ngModel)]="RequisitionType" aria-label="Select an option">
+                        <mat-radio-button (change)="radioChange($event)" style="margin-right: 15px" checked value="Internal">Internal</mat-radio-button>
+                        <mat-radio-button (change)="radioChange($event)" style="margin-right: 15px" value="Client">Client</mat-radio-button>
+                    </mat-radio-group>
+                </div> -->
+                <a *ngIf="From.includes('Requisition')" type="button" style="width: 80px;" class="btn btn-info pull-right" [routerLink]="['/requisitions/requisition/']">
+                    Back 
+                </a>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="row">
+                    <mat-accordion class="example-headers-align" multi>
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Filters
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <div class="form-group" style="margin-bottom: 50px;">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <ng-multiselect-dropdown name="skills" [placeholder]="'Skills'" [(ngModel)]="SkillSelectedItems" (onSelect)="onFilterSelect($event)" (onDeSelect)="onFilterSelect($event)" [data]="SkillList" [settings]="SkillDropDownSettings">
+                                        </ng-multiselect-dropdown>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <ng-multiselect-dropdown name="LocationsList" [placeholder]="'Location'" [(ngModel)]="LocationSelectedItems" (onSelect)="onFilterSelect($event)" (onDeSelect)="onFilterSelect($event)" [data]="LocationsList" [settings]="LocationsDropDownSettings">
+                                        </ng-multiselect-dropdown>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <ng-multiselect-dropdown name="JobTypesList" [placeholder]="'Job Type'" [(ngModel)]="JobTypeSelectedItems" (onSelect)="onFilterSelect($event)" (onDeSelect)="onFilterSelect($event)" [data]="JobTypesList" [settings]="JobTypesDropDownSettings">
+                                        </ng-multiselect-dropdown>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <ng-multiselect-dropdown name="QualificationsList" [placeholder]="'Qualification'" [(ngModel)]="QualificationSelectedItems" (onSelect)="onFilterSelect($event)" (onDeSelect)="onFilterSelect($event)" [data]="QualificationsList" [settings]="QualificationsDropDownSettings">
+                                        </ng-multiselect-dropdown>
+                                    </div>
+                                </div>
+                                &nbsp;
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        Experience(Years)
+                                        <ng5-slider [(value)]="ExpValue" (click)="onFilterSelect($event)" [(value)]="ExperienceSelectedItems" [options]="Experienceoptions"></ng5-slider>
+                                    </div>
+                                    <div style="margin-top: 25px;" class="col-sm-3">
+                                        <ng-multiselect-dropdown name="NoticePeriodsList" (onSelect)="onFilterSelect($event)" (onDeSelect)="onFilterSelect($event)" [(ngModel)]="NoticePeriodSelectedItems" [placeholder]="'Notice Period'" [data]="NoticePeriodsList" [settings]="NoticePeriodsDropDownSettings">
+                                        </ng-multiselect-dropdown>
+                                    </div>
+                                    <div style="margin-top: 25px;" class="col-sm-3">
+                                        <ng-multiselect-dropdown name="ApplicantActiveFromDropDownSettings" [(ngModel)]="ApplicantActiveSelectedItems" (onSelect)="onFilterSelect($event)" (onDeSelect)="onFilterSelect($event)" [placeholder]="'Applicant Active'" [data]="ApplicantActiveFromList"
+                                            [settings]="ApplicantActiveFromDropDownSettings">
+                                        </ng-multiselect-dropdown>
+                                    </div>
+                                </div>
+                                &nbsp;
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        Current CTC(Lakhs)
+                                        <ng5-slider [(value)]="CurrentCTCValue" (click)="onFilterSelect($event)" [(value)]="CurrentCTCItems" [options]="CurrentCTCoptions"></ng5-slider>
+                                    </div>
+                                    <div class="col-sm-6 ">
+                                        Expected CTC(Lakhs)
+                                        <ng5-slider [(value)]="ExpectedCTCValue " (click)="onFilterSelect($event)" [(value)]="ExpectedCTCItems" [options]="ExpectedCTCoptions"></ng5-slider>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </div>
+                &nbsp;
+                <div class="row ">
+                    &nbsp;&nbsp;
+                    <mat-slide-toggle id="togg" [(ngModel)]="showAvailableApplicants" (change)="ShowAvailabe()"  >
+                        Show Only Available Applicants
+                    </mat-slide-toggle>
+                    <mat-slide-toggle [(ngModel)]="showDetailPane" class="pull-right" (change)="drawer.toggle()">
+                        Show Details Pane
+                    </mat-slide-toggle>
+                </div>
+                &nbsp;
+                <div class="row">
+                    <mat-drawer-container class="example-container" autosize>
+                        <mat-drawer #drawer id="drawer" class="example-sidenav" position="end" mode="side">
+                            <div>
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="x_content">
+                                        <div *ngIf="!isEmpty()">
+                                            <p class="text-center" style="font-weight: bold; color: purple;" *ngIf="SelectedApplicant.status == 'Blocked'">The Applicant has been already ShortListed!</p>
+                                            <img style="height: 200px;margin-left: 150px;" src='https://phowdimages.azureedge.net/cloud/pics/8137/p/c7bfc992b6614bf9a36057506e1bfc4c/1.jpg?preset=details' alt='image'>
+                                            <table class="text-uppercase">
+                                                <tr>
+                                                    <th>Applicant Name :</th>
+                                                    <td>{{SelectedApplicant.name}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Date Of Birth :</th>
+                                                    <td>{{SelectedApplicant.dOB}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Email ID :</th>
+                                                    <td>{{SelectedApplicant.emailAddress}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Qualification :</th>
+                                                    <td>{{SelectedApplicant.qualification}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Experience :</th>
+                                                    <td>{{SelectedApplicant.experience}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Relevant Experience :</th>
+                                                    <td>{{SelectedApplicant.relevantExperience}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Current CTC :</th>
+                                                    <td>{{SelectedApplicant.currentCTC}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Expected CTC :</th>
+                                                    <td>{{SelectedApplicant.expectedCTC}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Joining Time :</th>
+                                                    <td>{{SelectedApplicant.joiningTime}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Skills-Proficiency :</th>
+                                                    <td>{{SelectedApplicant.skillsandProficiency}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Location Preference :</th>
+                                                    <td>{{SelectedApplicant.locationPreference}}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div class="infoText" *ngIf="isEmpty()" style="margin-top: 40%;">
+                                            Select Applicant to View Details
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-drawer>
+                        <div class="example-sidenav-content text-center">
+                            <div class="row">
+                                <div class="dataFormFilter form-group has-feedback col-md-12">
+                                    <div class="col-md-6">
+                                        <input type="search" (keyup)="GlobalFilter()" [(ngModel)]="SearchValue" class="form-control form-control-sm" placeholder="Filter by Keyword">
+                                        <span class="fa fa-filter form-control-feedback right"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row text-center">
+                                <mat-card [ngClass]="{'highlight' : Model[i].isSelected, 'not-highlight' : !Model[i].isSelected}" (click)="onSelect(i)" *ngFor="let item of Model ; let i = index">
+                                    <mat-card-header>
+                                        <div mat-card-avatar class="example-header-image"></div>
+                                        <mat-card-title>{{item.name}}</mat-card-title>
+                                        <mat-card-content>{{item.emailAddress}}</mat-card-content>
+                                        <mat-card-subtitle>{{item.qualification}}</mat-card-subtitle>
+                                        <mat-card-subtitle>{{item.source}}</mat-card-subtitle>
+                                    </mat-card-header>
+                                    <mat-card-actions>
+                                        <button *ngIf="item.status == 'Available'" (click)="ShortList(item.applicantId)" class="btn btn-primary cardbtn">ShortList</button>
+                                        <p *ngIf="item.status != 'Available'" class="cardbtn blink" style="color: red; font-weight: bold;">Blocked</p>
+                                    </mat-card-actions>
+                                </mat-card>
+                            </div>
+                        </div>
+                    </mat-drawer-container>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="spin" *ngIf="loader">
+    <mat-spinner class="custom-spinner-color"></mat-spinner>
+</div>

@@ -1,0 +1,70 @@
+.x_panel {
+    position: relative;
+}
+
+
+/* .pop-up-abs {
+    width: 500px;
+    position: absolute;
+    top: 30%;
+    left: 40%;
+    background-color: #fff;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 2px 3px 5px #999;
+    z-index: 999;
+} */
+
+.mat-dialog-container {
+    width: 500px !important;
+    height: 200px !important;
+    padding: 30px !important;
+    border-radius: 1px !important;
+    text-align: center !important;
+    border-radius: 0px !important;
+}
+
+.blink {
+    text-align: center;
+}
+
+span {
+    color: green;
+    animation: blink 1s linear infinite;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: .5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+table {
+    font-family: arial, sans-serif;
+    width: 100%;
+}
+
+td,
+th {
+    width: 345px;
+    padding: 8px;
+}
+
+th {
+    padding-left: 42px;
+}
+
+
+/* tr:nth-child(even) {
+    background-color: #dddddd;
+} */
+
+.x_content {
+    margin-left: 18px;
+}

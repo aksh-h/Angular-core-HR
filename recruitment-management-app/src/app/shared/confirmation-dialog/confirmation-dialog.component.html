@@ -1,0 +1,16 @@
+<!-- <div class="fullscreen-container"> -->
+<div class="pop-up-abs">
+    <h1 mat-dialog-title>
+        {{title}}
+    </h1>
+
+    <div mat-dialog-content>
+        <p>{{message}}</p>
+    </div>
+
+    <div mat-dialog-actions style="margin-left: 95px;">
+        <button mat-button (click)="onDismiss()" class="pull-right">No</button>
+        <button mat-raised-button color="primary" (click)="onConfirm()">Yes</button>
+    </div>
+</div>
+<!-- </div> -->

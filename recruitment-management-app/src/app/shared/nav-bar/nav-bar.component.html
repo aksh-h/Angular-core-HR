@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col menu_fixed">
+                <div class="left_col scroll-view">
+                    <div class="navbar nav_title" style="border: 0;">
+                        <a href="index.html" class="site_title"><img src="assets/images/Canarys-latest.png" alt="..." class="img-circle" width="50px"> <span>  Talent Enlist</span></a>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <!-- menu profile quick info -->
+                    <div class="profile clearfix">
+                        <div class="profile_pic">
+                            <img src="assets/images/img.jpg" alt="..." class="img-circle profile_img">
+                        </div>
+                        <div class="profile_info">
+                            <span>Welcome,</span>
+                            <h2><label id="userName"></label></h2>
+                        </div>
+                    </div>
+                    <!-- /menu profile quick info -->
+
+                    <br />
+
+                    <!-- sidebar menu -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                            <h3>General</h3>
+                            <ul class="nav side-menu">
+                                <li><a [routerLink]="['home/']"><i class="fa fa-th"></i> Dashboard </a>
+                                    <!-- <ul class="child_menu"> 
+                                        <a [routerLink]="['dashboard/']">Dashboard</a>
+                                          </ul> -->
+                                </li>
+                                <li id="admin"><a><i class="fa fa-list"></i> Admin <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a [routerLink]="['master/department/']">Department</a></li>
+                                        <li><a [routerLink]="['master/designation/']">Designation</a></li>
+                                        <li><a [routerLink]="['master/panelemployeemapping/']">Panel Employee Mapping</a></li>
+                                        <li><a [routerLink]="['master/panelgroup/']">Panel Groups</a></li>
+                                        <!-- <li><a [routerLink]="['master/role/']">Role</a></li> -->
+                                        <li><a [routerLink]="['master/skills/']">Skills</a></li>
+                                        <li><a [routerLink]="['master/jobportal/']">Job Portal</a></li>
+                                        
+                                       
+                                    </ul>
+                                </li>
+                               
+                                <li id="client"><a><i class="fa fa-newspaper-o"></i>Clients<span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a [routerLink]="['master/client/']">ClientsMaster</a></li>
+ 
+                                    </ul>
+                                </li>
+                                <li id="vendor"><a><i class="fa fa-newspaper-o"></i>Vendors<span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a [routerLink]="['master/vendor/']">VendorMaster</a></li>
+ 
+                                    </ul>
+                                </li>
+                                <li id="requisition"><a><i class="fa fa-newspaper-o"></i>Requisition<span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a [routerLink]="['requisitions/requisition/']">Requisitions</a></li>
+                                    </ul>
+                                </li>
+                                <li id="staffing"><a><i class="fa fa-newspaper-o"></i>Requisition<span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a [routerLink]="['requisitionstaffing/requisition/']">Requisitions</a></li>
+                                    </ul>
+                                </li>
+                                <li id="applicantsmenu"><a><i class="fa fa-users"></i>Applicants<span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a [routerLink]="['applicants/dashboard/Applicant']">DashBoard</a></li>
+                                        <li><a [routerLink]="['applicants/shortlisted']">ShortListed Applicants</a></li>
+                                        <li><a [routerLink]="['applicants/selected/Selected']">Selected/Rejected Applicants</a></li>
+                                        <li><a [routerLink]="['applicants/applicant/']">Applicants</a></li> 
+                                        <li><a [routerLink]="['applicants/resumeupload/']">Resume Upload</a></li> 
+                                    </ul>
+                                </li>
+                                
+                                <li id="applicantsstaffing"><a><i class="fa fa-users"></i>Applicants<span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a [routerLink]="['applicants/dashboardstaffing/Applicant']">DashBoard</a></li>
+                                        <li><a [routerLink]="['applicants/shortlistedstaffing']">ShortListed Applicants</a></li>
+                                        <li><a [routerLink]="['applicants/selectedstaffing/Selected']">Selected/Rejected Applicants</a></li>
+                                        <li><a [routerLink]="['applicants/applicant/']">Applicants</a></li>
+                                        <li><a [routerLink]="['applicants/resumeupload/']">Resume Upload</a></li> 
+                                    </ul>
+                                </li>
+
+                                <li id="employeesmenu"><a><i class="fa fa-users"></i>Employee<span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li ><a [routerLink]="['employee/interviewer']">Interview</a></li>
+                                    </ul>
+                                </li>
+                                <li id="salarybreakuptemplate"><a><i class="fa fa-list"></i>SalaryBreakup Template<span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li ><a [routerLink]="['master/salarybreakuptemplate/']">SalaryBreakup</a></li>
+                                    </ul>
+                                </li>
+
+                                
+                                <li id="interviewer"><a [routerLink]="['employee/interviewer']"><i class="fa fa-users"></i>Interview</a></li>
+
+                    
+                              
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /sidebar menu -->
+
+                    <!-- /menu footer buttons -->
+                    <div class="sidebar-footer hidden-small">
+                        <a data-toggle="tooltip" data-placement="top" title="Settings">
+                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Lock">
+                            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Logout" (click)="logout()" href="#">
+                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <app-top-bar></app-top-bar>
+            <!-- /top navigation -->
+
+            <!-- page content -->
+            <div class="right_col" role="main">
+                <div class="">
+                    <div class="page-title">
+                        <div class="title_left">
+
+                        </div>
+
+                        <div class="title_right">
+                            <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+            <!-- /page content -->
+
+            <!-- footer content -->
+            <footer>
+                <div class="pull-right">
+                    Recuitement Management - <a href="https://ecanarys.com">Canarys Automations Pvt Ltd</a>
+                </div>
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+        </div>
+    </div>
+</body>
+
+</html>

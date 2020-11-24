@@ -1,0 +1,21 @@
+<div mat-dialog-content>
+    <div class="form-group">
+        <label>Enter Address</label>
+        <!-- <button type="button" (click)="onDismiss()" style="width: 80px;" class="btn btn-info pull-right" data-dismiss="modal">Close</button> -->
+        <input type="text" class="form-control" (keydown.enter)="$event.preventDefault()" placeholder="Search Nearest Location" autocomplete="on" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
+    </div>
+
+    <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+        <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true" (dragEnd)="markerDragEnd($event)"></agm-marker>
+    </agm-map>
+
+    &nbsp;&nbsp; &nbsp;
+    <h4 style="font-weight: bold;">Address : {{address}}</h4>
+
+</div>
+<span layout="row">
+    <hr flex /></span>
+<div mat-dialog-actions class="pull-right">
+    <button type="button" (click)="onConfirm()" style="width: 130px;" class="btn btn-success pull-right" data-dismiss="modal">Select Address</button>
+    <button type="button" (click)="onDismiss()" style="width: 80px;" class="btn btn-danger pull-right" data-dismiss="modal">Close</button>
+</div>

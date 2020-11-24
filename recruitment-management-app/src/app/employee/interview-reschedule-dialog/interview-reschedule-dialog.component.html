@@ -1,0 +1,25 @@
+<!-- <div class="fullscreen-container"> -->
+<div mat-dialog-content>
+    <h1 class="pull-left" style="margin-bottom: 2px;" mat-dialog-title>{{title}}</h1>
+    <div class="row" data-backdrop="static">
+        <div class="col-md-12 col-sm-12">
+            <span layout="row"><hr flex/></span>
+
+            <div class="form-group" style="margin-bottom: 50px;">
+                <label class="col-form-label col-md-3 col-sm-3 label-align">Reschedule Comments:</label>
+                <div class="col-md-6 col-sm-6">
+                    <div [ngClass]="{ 'bad' : isSubmitted && !Model.feedBack }">
+                        <textarea name="feedback" style="width: 163%; height: 100px ;" class="form-control" [(ngModel)]="Model.feedBack" placeholder="Ex: Good Technical skills" required="required"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<span layout="row"><hr flex/></span>
+<div mat-dialog-actions style="margin-left: 95px;">
+    <button type="button" (click)="onConfirm()" style="width: 80px;" class="btn btn-info pull-right" data-dismiss="modal">Submit</button>
+    <button type="button" (click)="onDismiss()" style="width: 80px;" class="btn btn-danger pull-right" data-dismiss="modal">Cancel</button>
+</div>

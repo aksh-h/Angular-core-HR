@@ -1,0 +1,217 @@
+<!-- page content -->
+<div role="main">
+    <!-- top tiles -->
+    <div class="row tile_count">
+        <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+            <span class="count_top"><i class="fa fa-user"></i>Daily Interview Count</span>
+            <div class="count">{{DailyCount}}</div> 
+            <span class="count_bottom"> Today's Interview Count</span>
+        </div>
+
+        <!-- <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+            <span class="count_top"><i class="fa fa-user"></i>Daily Client's Interview Count</span>
+            <div class="count">{{ClientCount}}</div> 
+            <span class="count_bottom"> Today's Client Interview Count</span>
+        </div> -->
+        
+        <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+            <span class="count_top"><i class="fa fa-user"></i> Weekly Interview Count</span>
+            <div class="count">{{WeeklyCount}}</div> 
+            <span class="count_bottom"> From this Week</span>
+        </div>
+        <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+            <span class="count_top"><i class="fa fa-user"></i>Monthly Interview Count</span>
+            <div class="count">{{MonthlyCount}}</div> 
+            <span class="count_bottom"> From this Month</span>
+        </div>
+        <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+            <span class="count_top"><i class="fa fa-user"></i> Total InterviewCount</span>
+             <div class="count">{{InterviewCount}}</div> 
+            <span class="count_bottom">Overall Interviews</span>
+        </div>
+        
+    </div>
+    <!-- /top tiles -->
+
+    <br />
+
+    
+
+
+    <div class="row">
+        
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Weekly Interview List <small>bar-presentation</small></h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#">Settings 1</a>
+                                        </li>
+                                        <li><a href="#">Settings 2</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content ">
+                            <div class="dashboard-widget-content">
+                                <div class="col-md-12 ">
+                                    <!-- <h2 class="line_30">125.7k Views from 60 countries</h2> -->
+                                    <div style="display: block;">
+                                        <canvas baseChart style="height:392px!important;width: 492px!important;" height= "392" width="492"
+                                           [datasets]="barChartData"
+                                           [labels]="barChartLabels"
+                                           [options]="barChartOptions"
+                                           [plugins]="barChartPlugins"
+                                           [legend]="barChartLegend"
+                                           [chartType]="barChartType"
+                                           [colors]="barChartColors">                                          
+                                        </canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>   
+
+                </div>
+
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Pending Requisition <small>bar-presentation</small></h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#">Settings 1</a>
+                                        </li>
+                                        <li><a href="#">Settings 2</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content ">
+                            <div class="dashboard-widget-content">
+                                <div class="col-md-12 ">
+                                   <div style="display: block;">
+                                      <canvas baseChart 
+                                          [data]="pieChartData" 
+                                          [labels]="pieChartLabels" 
+                                          [chartType]="pieChartType"
+                                          [options]="pieChartOptions"
+                                          [plugins]="pieChartPlugins"
+                                          [legend]="pieChartLegend">
+                                      </canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Weekly Interview List <small>bar-presentation</small></h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#">Settings 1</a>
+                                        </li>
+                                        <li><a href="#">Settings 2</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content ">
+                            <div class="dashboard-widget-content">
+                                <div class="col-md-12 ">
+                                    <!-- <h2 class="line_30">125.7k Views from 60 countries</h2> -->
+                                    <div style="display: block;">
+                                        <canvas baseChart
+                                          [datasets]="bubbleChartData"
+                                          [options]="bubbleChartOptions"
+                                          [legend]="bubbleChartLegend"
+                                          [chartType]="bubbleChartType">
+                                        </canvas>
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>   
+
+                </div>
+
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Recruiter wise Requisition count<small>bar-presentation</small></h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#">Settings 1</a>
+                                        </li>
+                                        <li><a href="#">Settings 2</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content ">
+                            <div class="dashboard-widget-content">
+                                <div class="col-md-12 ">
+                                    <!-- <h2 class="line_30">125.7k Views from 60 countries</h2> -->
+                                    <div style="display: block">
+                                        <canvas baseChart
+                                                    [data]="doughnutChartData"
+                                                    [labels]="doughnutChartLabels"
+                                                    [chartType]="doughnutChartType"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>   
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- /page content -->

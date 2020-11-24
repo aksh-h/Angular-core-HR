@@ -1,0 +1,112 @@
+<div id="index" class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>ClientsContactDetails List</h2>
+                <button *ngIf="!readonlycontrols" type="button" style="width: 80px;" class="btn btn-primary pull-right" (click)="ShowPopup()">
+                    Create 
+                   </button>
+                   <button  type="button" style="width: 80px;" class="btn btn-primary pull-right contactback" (click)="Back()">
+                    Back
+                   </button>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card-box table-responsive">
+                            <table id="Clientscontactdetailstable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" data-backdrop="static" style="display: none;" id="myModal">
+    <div class="col-md-12 col-sm-12">
+
+        <div class="x_panel ">
+            <div>
+                <div>
+
+                    <div class="x_title">
+                        <h2>Add Client Contact Details </h2>
+                        <button (click)="HidePopup()" style="width: 90px;" class="btn btn-primary Back pull-right">Back</button>
+                        <div class="clearfix"></div>
+                    </div>
+                    <form [formGroup]="clientcontactform" (ngSubmit)="onSubmit()" method="post" novalidate>
+
+                        <div class="x_content text-center">
+                            <div class="form-group" style="margin-bottom: 50px;">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align">ContactPerson<span
+                            class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6">
+                                    <div [ngClass]="{ 'bad' : isSubmitted && f.contactPerson.errors }">
+                                        <input [readonly]="readonlycontrols" name="contactPerson" class="form-control" formControlName="contactPerson" data-validate-length-range="50" [(ngModel)]="Model.contactPerson" placeholder="Ex:ABC" required="required">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-3"></div>
+                            </div>
+
+                            &nbsp;
+
+                        
+                                <div class="form-group" style="margin-bottom: 50px;">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align">Contact Phone No<span
+                                class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div [ngClass]="{ 'bad' : isSubmitted && f.contactPhoneNo.errors }">
+                                            <input [readonly]="readonlycontrols" type="number" name="contactPhoneNo" class="form-control" formControlName="contactPhoneNo" data-validate-length-range="50" [(ngModel)]="Model.contactPhoneNo" placeholder="Ex: ABC" required="required">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3"></div>
+                                </div>
+    
+                                &nbsp;
+                                <div class="form-group" style="margin-bottom: 50px;">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align">Contact Person EmailID</label>
+                                    <div class="col-md-6 col-sm-6">
+                                         <div [ngClass]="{ 'bad' : isSubmitted && f.contactPersonEmailId.errors }">
+                                            <input [readonly]="readonlycontrols" name="contactPersonEmailId" class="form-control" formControlName="contactPersonEmailId" data-validate-length-range="50" [(ngModel)]="Model.contactPersonEmailId" placeholder="Ex: ABC">
+                                         </div> 
+                                    </div>
+                                    <div class="col-md-3 col-sm-3"></div>
+                                </div>
+                                &nbsp;
+                                <div class="form-group" style="margin-bottom: 50px;">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align">Contact Person Designation<span
+                                class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div [ngClass]="{ 'bad' : isSubmitted && f.contactPersonDesignation.errors }">
+                                            <input [readonly]="readonlycontrols" name="contactPersonDesignation" class="form-control" formControlName="contactPersonDesignation" data-validate-length-range="50" [(ngModel)]="Model.contactPersonDesignation" placeholder="Ex: ABC">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3 col-sm-3"></div>
+                                </div>
+                                &nbsp;
+                                
+                            <div class="text-center">
+                                <button type="button" (click)="onSubmit()" style="width: 80px;" class="btn btn-primary">
+                                    Save
+                                   </button>
+                                <button type="button" (click)="HidePopup()" style="width: 80px;" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                            </div>
+                            &nbsp; &nbsp;&nbsp; &nbsp;
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="spin" *ngIf="loader">
+    <mat-spinner class="custom-spinner-color"></mat-spinner>
+</div>

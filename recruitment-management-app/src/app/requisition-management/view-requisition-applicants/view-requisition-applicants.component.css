@@ -1,0 +1,97 @@
+.example-container {
+    width: auto;
+    height: auto;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.example-sidenav-content {
+    height: 500px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.example-sidenav {
+    padding: 20px;
+    width: 600px;
+}
+
+.example-header-image {
+    background-image: url('https://phowdimages.azureedge.net/cloud/pics/8137/p/c7bfc992b6614bf9a36057506e1bfc4c/1.jpg?preset=details');
+    background-size: cover;
+}
+
+.custom-spinner-color {
+    stroke: #234188;
+}
+
+.spin {
+    position: absolute;
+    left: 43%;
+    top: 40%;
+    z-index: 99;
+}
+
+.example-card {
+    max-width: 500px;
+    margin: 15px;
+    border-color: violet;
+    border: outset;
+}
+
+.highlight {
+    background: skyblue;
+    max-width: 500px;
+    margin: 15px;
+    border-color: violet;
+    border: outset;
+}
+
+.not-highlight {
+    background: #fff;
+    max-width: 500px;
+    margin: 15px;
+    border-color: violet;
+    border: outset;
+}
+
+td,
+th {
+    width: 171px;
+    padding: 10px;
+}
+
+.infoText {
+    color: darkgrey;
+    font-size: x-large;
+    text-align: center;
+}
+
+.dataFormFilter {
+    TEXT-ALIGN: LEFT;
+    margin-top: 15px
+}
+
+.mat-card-content {
+    margin-top: 5px !important;
+}
+
+.cardbtn {
+    margin-left: 308px;
+    border-color: #ffffff !important;
+}
+
+.status {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+}
+
+.mat-typography p {
+    margin-top: 20px;
+}
+
+.applicantDetails tr td span {
+    display: inline;
+    margin-left: 8px;
+}

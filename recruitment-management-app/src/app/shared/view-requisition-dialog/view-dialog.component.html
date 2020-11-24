@@ -1,0 +1,64 @@
+<!-- <div class="fullscreen-container"> -->
+<div class="pop-up-abs">
+    <h1 mat-dialog-title>
+        {{title}}
+        <div class="pull-right"><small> Status :
+            <span class="blink"><b>{{Model.status}}</b></span></small>
+        </div>
+    </h1>
+    <span layout="row"><hr flex/></span>
+    <div mat-dialog-content>
+
+        <table class="row">
+            <tr class="form-group">
+                <th>Requisition Title :</th>
+                <td>{{Model.title}}</td>
+
+                <th>Department :</th>
+                <td>{{Model.department.department}}</td>
+            </tr>
+            <tr class="form-group">
+                <th>Skills :</th>
+                <td>{{Model.SkillsText}}</td>
+
+                <th>Designation :</th>
+                <td>{{Model.designation.designation}}</td>
+
+            </tr>
+            <tr class="form-group">
+                <th>Years Of Experience :</th>
+                <td>{{Model.yearsofExperience}}</td>
+
+                <th>Joining Tenure :</th>
+                <td>{{Model.joiningTenure}}</td>
+            </tr>
+            <tr class="form-group">
+
+                <th>No Of Positions :</th>
+                <td>{{Model.noofPositions}}</td>
+
+                <th>Location :</th>
+                <td>{{Model.location}}</td>
+            </tr>
+            <tr class="form-group">
+                <th>Comments :</th>
+                <td>{{Model.comments}}</td>
+
+                <th>Manager Comments :</th>
+                <td>{{Model.managerComments}}</td>
+            </tr>
+            <tr class="form-group">
+                <th>Cancellation :</th>
+                <td style="color: red;">{{Model.cancelComments}}</td>
+
+                <th>Client :</th>
+                <td style="color: red;">{{Model.cancelComments}}</td>
+            </tr>
+        </table>
+
+    </div>
+    <span layout="row"><hr flex/></span>
+    <div mat-dialog-actions style="margin-left: 95px;">
+        <button type="button" (click)="onDismiss()" style="width: 80px;" class="btn btn-info pull-right" data-dismiss="modal">Close</button>
+    </div>
+</div>

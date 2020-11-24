@@ -1,0 +1,96 @@
+<div mat-dialog-content>
+    <h1 class="pull-left" style="margin-bottom: 2px;" mat-dialog-title>{{title}}</h1>
+    <div class="row" data-backdrop="static">
+        <div class="col-md-12 col-sm-12">
+            <span layout="row"><hr flex/></span>
+            <div class="x_panel ">
+                <mat-accordion class="example-headers-align" multi>
+                    <mat-expansion-panel *ngFor="let interview of Model">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                {{interview.roundName}}
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div class="clearfix"></div>
+                        <div id="index" class="row">
+                            <div class="col-md-12 col-sm-12 padding_zero">
+                                <div class="form-group">
+                                    <label class="col-form-label col-md-4 col-sm-4 label-align">Interviewer :</label>
+                                    <div class="col-md-6 col-sm-6">
+                                        {{interview.tblInterviewEmployeeMapping[0].employee.employeeName}}
+                                    </div>
+                                    <div class="col-md-3 col-sm-3"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12 padding_zero">
+                                <div class="form-group">
+                                    <label class="col-form-label col-md-4 col-sm-4 label-align">Interview Date:</label>
+                                    <div class="col-md-6 col-sm-6">
+                                        {{interview.interviewDate}}
+                                    </div>
+                                    <div class="col-md-3 col-sm-3"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 padding_zero">
+                                <div class="form-group">
+                                    <label class="col-form-label col-sm-4 label-align pull-left">Marks:</label>
+                                    <div class="col-md-8 col-sm-8" style="margin-bottom:20px">
+                                        <table class="feedback" style="border: 1px solid #ccc;">
+                                            <tr>
+                                                <th> Skill</th>
+                                                <th> Score</th>
+                                            </tr>
+                                            <tbody>
+                                                <tr *ngFor="let skills of interview.applicantRequisition.requisition.tblRequisitionSkillMapping; let i = index">
+                                                    <td>{{skills.skill.skillName}}</td>
+                                                    <td>{{skills.skill.skillRating}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12 padding_zero">
+                                <div class="form-group">
+                                    <label class="col-form-label col-md-4 col-sm-4 label-align">Communication:</label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div>
+                                            {{interview.attitude}}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12 padding_zero">
+                                <div class="form-group">
+                                    <label class="col-form-label col-md-4 col-sm-4 label-align">Attitude :</label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div>
+                                            {{interview.communication}}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12 padding_zero">
+                                <div class="form-group">
+                                    <label class="col-form-label col-md-4 col-sm-4 label-align">Feed Back :</label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div>
+                                            {{interview.feedBack}}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+        </div>
+    </div>
+</div>
+<span layout="row"><hr flex/></span>
+<div mat-dialog-actions style="margin-left: 95px;">
+    <button type="button" (click)="onDismiss()" style="width: 80px;" class="btn btn-danger pull-right" data-dismiss="modal">Cancel</button>
+</div>

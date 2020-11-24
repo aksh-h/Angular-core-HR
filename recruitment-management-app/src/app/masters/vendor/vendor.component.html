@@ -1,0 +1,238 @@
+<div id="index" class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Vendor Details</h2>
+                <button *ngIf="!readonlycontrols" type="button" style="width: 80px;" class="btn btn-primary pull-right" (click)="ShowPopup()">
+                    Create 
+                   </button>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card-box table-responsive">
+                            <table id="Vendortable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row" data-backdrop="static" style="display: none;" id="myModal">
+    <div class="col-md-12 col-sm-12">
+
+        <div class="x_panel ">
+            <div>
+                <div>
+
+                    <div class="x_title">
+                        <h2>Add Vendor </h2>
+                        <button (click)="HidePopup()" style="width: 90px;" class="btn btn-primary Back pull-right">Back</button>
+                        <div class="clearfix"></div>
+                    </div>
+                    <form [formGroup]="vendorform" (ngSubmit)="onSubmit()" method="post" novalidate>
+
+                        <div class="x_content text-center">
+                            <div class="form-group" style="margin-bottom: 50px;">
+                                <label class="col-form-label col-md-2 col-sm-3 label-align">Vendor Name<span
+                            class="required">*</span></label>
+                                <div class="col-md-4 col-sm-3">
+                                    <div [ngClass]="{ 'bad' : isSubmitted && f.vendorName.errors }">
+                                        <input [readonly]="readonlycontrols" name="vendorName" class="form-control" formControlName="vendorName" data-validate-length-range="50" [(ngModel)]="Model.vendorName" placeholder="Ex:ABC" required="required">
+                                    </div>
+                                </div>
+                                <!-- <div class="col-md-3 col-sm-3"></div>
+                            </div>
+
+                            &nbsp;
+        
+                            <div class="form-group" style="margin-bottom: 50px;"> -->
+                                <label class="col-form-label col-md-2 col-sm-3 label-align">Nda Start Date<span
+                            class="required">*</span></label>
+                            <div class="col-md-4 col-sm-3">
+                                    <div [ngClass]="{ 'bad' : isSubmitted && f.ndastartDate.errors }">
+                                        <input [readonly]="readonlycontrols" type="date" name="ndastartDate" formControlName="ndastartDate" class="form-control" data-validate-length-range="50" [(ngModel)]="Model.ndastartDate" placeholder="Ex:05/20/1990" required="required">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-3"></div>
+                            </div>
+
+
+
+                            &nbsp;
+
+
+                            <div class="form-group" style="margin-bottom: 50px;">
+                                <label class="col-form-label col-md-2 col-sm-3 label-align">Nda End Date<span
+                            class="required">*</span></label>
+                            <div class="col-md-4 col-sm-3">
+                                    <div [ngClass]="{ 'bad' : isSubmitted && f.ndaendDate.errors }">
+                                        <input [readonly]="readonlycontrols" type="date" name="ndaendDate" class="form-control" formControlName="ndaendDate" data-validate-length-range="50" [(ngModel)]="Model.ndaendDate" placeholder="Ex: Ex:05/20/1990" required="required">
+                                    </div>
+                                </div>
+                                <!-- <div class="col-md-3 col-sm-3"></div>
+                            </div>
+                            &nbsp;
+                            <div class="form-group" style="margin-bottom: 50px;"> -->
+                                <label class="col-form-label col-md-2 col-sm-3 label-align">Contract Start Date CTC</label>
+                                <div class="col-md-4 col-sm-3">
+                                    <div [ngClass]="{ 'bad' : isSubmitted && f.contractStartDate.errors }">
+                                    <input [readonly]="readonlycontrols" type="date" name="contractStartDate" formControlName="contractStartDate" class="form-control" data-validate-length-range="50" [(ngModel)]="Model.contractStartDate" placeholder="Ex:6" required="required">
+                                </div>
+                                </div>
+                                <div class="col-md-3 col-sm-3"></div>
+                            </div>
+                            &nbsp;
+                            <div class="form-group" style="margin-bottom: 50px;">
+                                <label class="col-form-label col-md-2 col-sm-3 label-align">Contract End Date<span
+                            class="required">*</span></label>
+                            <div class="col-md-4 col-sm-3">
+                                    <div [ngClass]="{ 'bad' : isSubmitted && f.contractEndDate.errors }">
+                                        <input [readonly]="readonlycontrols" type="date" name="contractEndDate" class="form-control" formControlName="contractEndDate" data-validate-length-range="50" [(ngModel)]="Model.contractEndDate" placeholder="Ex:5" required="required">
+                                    </div>
+                                </div>
+                                <!-- <div class="col-md-3 col-sm-3"></div>
+                            </div>
+
+                            &nbsp;
+                           
+
+                            <div class="form-group" style="margin-bottom: 50px;"> -->
+                                <label class="col-form-label col-md-2 col-sm-3 label-align">Type of Business</label>
+                                <div class="col-md-4 col-sm-3">
+                                    <input [readonly]="readonlycontrols" name="typeofBusiness" formControlName="typeofBusiness" class="form-control" data-validate-length-range="50" [(ngModel)]="Model.typeofBusiness"  >
+                                </div>
+                                <div class="col-md-3 col-sm-3"></div>
+                            </div>
+                            &nbsp;
+      
+                           
+                            
+
+                            <div class="form-group" style="margin-bottom: 50px;">
+                                <label class="col-form-label col-md-2 col-sm-3 label-align">Specialization</label>
+                                <div class="col-md-4 col-sm-3">
+                                    <input [readonly]="readonlycontrols" name="specialization" formControlName="specialization" class="form-control" data-validate-length-range="50" [(ngModel)]="Model.specialization" placeholder="Ex:Banglore" >
+                                </div>
+                                <!-- <div class="col-md-3 col-sm-3"></div>
+                            </div>
+
+                           
+                            &nbsp;
+
+                            <div  class="form-group" style="margin-bottom: 50px;"> -->
+                                <label class="col-form-label col-md-2 col-sm-3 label-align">Website</label>
+                                <div class="col-md-4 col-sm-3">
+                                    <textarea name="website" formControlName="website" [readonly]="readonlycontrols" class="form-control" data-validate-length-range="100" [(ngModel)]="Model.website" placeholder="" ></textarea>
+                                </div>
+                                <div class="col-md-3 col-sm-3"></div>
+                            </div>
+
+                            &nbsp;
+
+                            <div  class="form-group" style="margin-bottom: 50px;">
+                                <label class="col-form-label col-md-2 col-sm-3 label-align">Address Line1</label>
+                                <div class="col-md-4 col-sm-3">
+                                    <div [ngClass]="{ 'bad' : isSubmitted && f.addressLine1.errors }">
+                                    <textarea name="addressLine1" formControlName="addressLine1" [readonly]="readonlycontrols" class="form-control" data-validate-length-range="100" [(ngModel)]="Model.addressLine1" placeholder="" required="required"></textarea>
+                                </div>
+                                </div>
+                                <!-- <div class="col-md-3 col-sm-3"></div>
+                            </div>
+
+                            &nbsp;
+
+                            <div  class="form-group" style="margin-bottom: 50px;"> -->
+                                <label class="col-form-label col-md-2 col-sm-3 label-align">Address Line2</label>
+                                <div class="col-md-4 col-sm-3">
+                                    <textarea name="addressLine2" formControlName="addressLine2" [readonly]="readonlycontrols" class="form-control" data-validate-length-range="100" [(ngModel)]="Model.addressLine2" placeholder="" ></textarea>
+                                </div>
+                                <div class="col-md-3 col-sm-3"></div>
+                            </div>
+
+                           
+
+                           
+                            &nbsp;
+                            <div class="form-group" style="margin-bottom: 50px;">
+                                <label class="col-form-label col-md-2 col-sm-3 label-align">Country<span
+                            class="required">*</span></label>
+                            <div class="col-md-4 col-sm-3">
+                                    <div [ngClass]="{ 'bad' : isSubmitted && f.country.errors }">
+                                        <select name="coun" (change)="CountryChange()" [attr.disabled]="readonlycontrols ? '' : null" class="form-control" formControlName="country" [(ngModel)]="Model.country" placeholder="Ex: Mysore" required="required">                                   
+                                            <option *ngFor="let coun of CountryList" [value]="coun.countryId">{{coun.name}}</option>
+                                        </select> 
+                                    </div>
+                                </div>
+
+                                <!-- <div class="col-md-3 col-sm-3"></div>
+                            </div>
+                            &nbsp;
+                            
+                         <div class="form-group" style="margin-bottom: 50px;"> -->
+                                <label class="col-form-label col-md-2 col-sm-3 label-align">State<span
+                            class="required">*</span></label>
+                            <div class="col-md-4 col-sm-3">
+                                    <div [ngClass]="{ 'bad' : isSubmitted && f.state.errors }">
+                                        <select name="sta" (change)="StateChange()" [attr.disabled]="readonlycontrols ? '' : null" class="form-control" formControlName="state" [(ngModel)]="Model.state" placeholder="Ex: Mysore" required="required">                                   
+                                            <option *ngFor="let sta of StateList" [value]="sta.stateId">{{sta.name}}</option>
+                                        </select>                                        
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-3"></div>
+                            </div>
+                            &nbsp;
+
+                            <div class="form-group" style="margin-bottom: 50px;">
+                                <label class="col-form-label col-md-2 col-sm-3 label-align">City<span
+                            class="required">*</span></label>
+                                <div class="col-md-4 col-sm-3">
+                                    <div [ngClass]="{ 'bad' : isSubmitted && f.city.errors }">
+                                        <select name="ci" [attr.disabled]="readonlycontrols ? '' : null" class="form-control" formControlName="city" [(ngModel)]="Model.city" placeholder="Ex: Mysore" required="required">                                   
+                                            <option *ngFor="let ci of CityList" [value]="ci.cityId">{{ci.name}}</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <!-- <div class="col-md-3 col-sm-3"></div>
+                            </div>
+                            &nbsp; 
+                            <div  class="form-group" style="margin-bottom: 50px;"> -->
+                                <label class="col-form-label col-md-2 col-sm-3 label-align">PinCode</label>
+                                <div class="col-md-4 col-sm-3">
+                                    <div [ngClass]="{ 'bad' : isSubmitted && f.pinCode.errors }">
+                                        <input [readonly]="readonlycontrols" type="number" min="0" name="pinCode" class="form-control" formControlName="pinCode" data-validate-length-range="50" [(ngModel)]="Model.pinCode" placeholder="" required="required">
+                                </div>
+                            </div>
+                                <div class="col-md-3 col-sm-3"></div>
+                            </div>
+
+                            &nbsp;
+                            <div class="text-center">
+                                <button type="button" (click)="onSubmit()" style="width: 80px;" class="btn btn-primary">
+                                    Save
+                                   </button>
+                                <button type="button" (click)="HidePopup()" style="width: 80px;" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                            </div>
+                            &nbsp; &nbsp;&nbsp; &nbsp;
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<div class="spin" *ngIf="loader">
+    <mat-spinner class="custom-spinner-color"></mat-spinner>
+</div>
+

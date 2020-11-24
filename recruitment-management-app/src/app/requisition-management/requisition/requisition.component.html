@@ -1,0 +1,309 @@
+<div id="index" class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Requisition List</h2>
+                <div *ngIf="role == recruiter" class="pull-right" style="padding-top: 10px;">
+                    
+                </div>
+                <button *ngIf="!readonlycontrols" type="button" style="width: 80px;" class="btn btn-primary pull-right" (click)="ShowPopup()">
+                    Create 
+                   </button>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card-box table-responsive">
+                            <table id="Requisitiontable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" data-backdrop="static" style="display: none;" id="myModal">
+    <div class="col-md-12 col-sm-12">
+        <div class="x_panel ">
+            <div>
+                <div>
+                    <div class="x_title">
+                        <h2>Add Requisition </h2>
+                        <button (click)="HidePopup()" style="width: 90px;" class="btn btn-primary Back pull-right">Back</button>
+                        <div class="clearfix"></div>
+                    </div>
+                    <form [formGroup]="requisitionForm" (ngSubmit)="onSubmit()" method="post" novalidate>
+                        <div class="x_content text-center">
+                            <!-- <div *ngIf="role == recruiterrole" class="form-group" style="margin-bottom: 50px;">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align">Client<span
+                            class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6">
+                                    <select name="clientId" [attr.disabled]="readonlycontrols ? '' : null" class="form-control" formControlName="clientId" [(ngModel)]="Model.clientId" placeholder="Client" required="required">                                   
+                                        <option *ngFor="let client of ClientsList" [value]="client.clientId">{{client.clientName}}</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 col-sm-3"></div>
+                            </div>
+                            &nbsp; -->
+                            <div class="form-group" style="margin-bottom: 50px;">
+                                <label class="col-form-label col-md-2 col-sm-3 label-align">Requisition Title<span
+                            class="required">*</span></label>
+                                <div class="col-md-4 col-sm-3">
+                                    <div [ngClass]="{ 'bad' : isSubmitted && f.title.errors }">
+                                        <input [readonly]="readonlycontrols" name="title" class="form-control" formControlName="title" data-validate-length-range="50" [(ngModel)]="Model.title" placeholder="Ex: Recruitment Management" required="required">
+                                    </div>
+                                </div>
+                                <!-- <div class="col-md-3 col-sm-3"></div>
+                            </div>
+                            &nbsp;
+                            <div class="form-group" style="margin-bottom: 50px;"> -->
+                                <label class="col-form-label col-md-2 col-sm-3 label-align">Skills</label>
+                            <div class="col-md-4 col-sm-3">
+                                    
+                                        <ng-multiselect-dropdown *ngIf="readonlycontrols" disabled="true" name="skills" formControlName="skills" [placeholder]="'Skills'" [data]="SkillList" [(ngModel)]="Model.tblRequisitionSkillMapping" [settings]="SkillDropDownSettings">
+                                        </ng-multiselect-dropdown>
+                                        <ng-multiselect-dropdown *ngIf="!readonlycontrols" name="skills" formControlName="skills" [placeholder]="'Skills'" [data]="SkillList" [(ngModel)]="Model.tblRequisitionSkillMapping" [settings]="SkillDropDownSettings">
+                                        </ng-multiselect-dropdown>
+                                    
+                                </div>
+                                <!-- <div class="col-md-3 col-sm-3"></div> -->
+                            </div>
+                            &nbsp;
+                            <div class="form-group" style="margin-bottom: 50px;">
+                                <label class="col-form-label col-md-2 col-sm-3 label-align">Department<span
+                            class="required">*</span></label>
+                            <div class="col-md-4 col-sm-3">
+                                    <div [ngClass]="{ 'bad' : isSubmitted && f.departmentId.errors }">
+                                        <select name="dept" [attr.disabled]="readonlycontrols ? '' : null" class="form-control" formControlName="departmentId" [(ngModel)]="Model.departmentId" placeholder="Ex: Manager" required="required">                                   
+                                    <option *ngFor="let dept of DeptList" [value]="dept.departmentId">{{dept.department}}</option>
+                                </select>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-md-3 col-sm-3"></div>
+                            </div>
+                            &nbsp;
+                            <div class="form-group" style="margin-bottom: 50px;"> -->
+                                <label class="col-form-label col-md-2 col-sm-3 label-align">Designation<span
+                            class="required">*</span></label>
+                            <div class="col-md-4 col-sm-3">
+                                    <div [ngClass]="{ 'bad' : isSubmitted && f.designationId.errors }">
+                                        <select name="desig" [attr.disabled]="readonlycontrols ? '' : null" [readonly]="readonlycontrols" class="form-control" formControlName="designationId" [(ngModel)]="Model.designationId" placeholder="Ex: Manager" required="required">
+                                  
+                                    <option *ngFor="let dest of DesigList" [value]="dest.designationId">{{dest.designation}}</option>
+                                </select>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-md-3 col-sm-3"></div> -->
+                            </div>
+                            &nbsp;
+                            <div class="form-group" style="margin-bottom: 50px;">
+                                <label class="col-form-label col-md-2 col-sm-3 label-align">Years Of Experience<span
+                            class="required">*</span></label>
+                            <div class="col-md-4 col-sm-3">
+                                    <div [ngClass]="{ 'bad' : isSubmitted && f.yearsofExperience.errors }">
+                                        <input [readonly]="readonlycontrols" type="number" min="0" name="yearsofExperience" class="form-control" formControlName="yearsofExperience" data-validate-length-range="50" [(ngModel)]="Model.yearsofExperience" placeholder="Ex: 5" required="required">
+                                    </div>
+                                </div>
+                                <!-- <div class="col-md-3 col-sm-3"></div>
+                            </div>
+                            &nbsp;
+
+                            <div class="form-group" style="margin-bottom: 50px;"> -->
+                                <label class="col-form-label col-md-2 col-sm-3 label-align">Joining Tenure(Months)<span
+                            class="required">*</span></label>
+                            <div class="col-md-4 col-sm-3">
+                                    <div [ngClass]="{ 'bad' : isSubmitted && f.joiningTenure.errors }">
+                                        <input [readonly]="readonlycontrols" type="number" min="0" name="joiningTenure" class="form-control" formControlName="joiningTenure" data-validate-length-range="50" [(ngModel)]="Model.joiningTenure" placeholder="Ex: 2" required="required">
+                                    </div>
+                                </div>
+                                <!-- <div class="col-md-3 col-sm-3"></div> -->
+                            </div>
+                            &nbsp;
+                            <div class="form-group" style="margin-bottom: 50px;">
+                                <label class="col-form-label col-md-2 col-sm-3 label-align">No Of Positions<span
+                            class="required">*</span></label>
+                            <div class="col-md-4 col-sm-3">
+                                    <div [ngClass]="{ 'bad' : isSubmitted && f.noofPositions.errors }">
+                                        <input [readonly]="readonlycontrols" type="number" name="noofPositions" class="form-control" formControlName="noofPositions" data-validate-length-range="50" [(ngModel)]="Model.noofPositions" placeholder="Ex: 2" required="required">
+                                    </div>
+                                </div>
+                                <!-- <div class="col-md-3 col-sm-3"></div>
+                            </div>
+                            &nbsp;
+                            <div class="form-group" style="margin-bottom: 50px;"> -->
+                                <label class="col-form-label col-md-2 col-sm-3 label-align">Location</label>
+                                <div class="col-md-4 col-sm-3">
+                                    <input [readonly]="readonlycontrols" name="location" formControlName="location" class="form-control" data-validate-length-range="50" [(ngModel)]="Model.location" placeholder="Ex: Bengaluru" required="required">
+                                </div>
+                                <!-- <div class="col-md-3 col-sm-3"></div> -->
+                            </div>
+                            &nbsp;
+                            <div class="form-group" style="margin-bottom: 50px; columns: lg -7px;">
+                                <label class="col-form-label col-md-2 col-sm-3 label-align">Primary Skills<span
+                                    class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6">
+                                    <div [ngClass]="{ 'bad' : isSubmitted && f.primarySkills.errors }">
+                                    <textarea name="primarySkills" [readonly]="readonlycontrols" formControlName="primarySkills" class="form-control" data-validate-length-range="100" [(ngModel)]="Model.primarySkills" placeholder="" required="required"></textarea>
+                                </div>
+                            </div>
+                                <div class="col-md-3 col-sm-3"></div>
+                            </div>
+                            &nbsp;
+                            <div class="form-group" style="margin-bottom: 50px; columns: lg -7px;">
+                                <label class="col-form-label col-md-2 col-sm-3 label-align">Secondary Skills
+                                   </label>
+                                <div class="col-md-6 col-sm-6">
+                                    
+                                    <textarea name="secondarySkills" [readonly]="readonlycontrols" formControlName="secondarySkills" class="form-control" data-validate-length-range="100" [(ngModel)]="Model.secondarySkills" placeholder="" required="required"></textarea>
+                                </div>
+                            
+                                <div class="col-md-3 col-sm-3"></div>
+                            </div>
+                            
+                            &nbsp;
+                           
+                            
+                            <div class="form-group" style="margin-bottom: 50px;columns: lg -7px;">
+                                <label class="col-form-label col-md-2 col-sm-3 label-align">Work Flow<span
+                            class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6">
+                                    <div [ngClass]="{ 'bad' : isSubmitted && f.workflow.errors }">
+                                        <textarea name="workflow" [readonly]="true" formControlName="workflow" class="form-control pull-left" [(ngModel)]="Model.applicantWorkFlow" placeholder="Work Flow" required="required"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-3" style="margin-top:10px;"> <button type="button" class="btn btn-primary pull-left" (click)="OpenWorkFlow()">Select Work Flow</button></div>
+                            </div>
+                            &nbsp;
+                            <div class="form-group" style="margin-bottom: 50px; columns: lg -7px;">
+                                <label class="col-form-label col-md-2 col-sm-3 label-align">Comments</label>
+                                <div class="col-md-6 col-sm-6">
+                                    <textarea name="comments" [readonly]="readonlycontrols" formControlName="comments" class="form-control" data-validate-length-range="100" [(ngModel)]="Model.comments" placeholder="Ex: Database skills highlighted" required="required"></textarea>
+                                </div>
+                                <!-- <div class="col-md-3 col-sm-3"></div>--->
+                            
+                            &nbsp; 
+                            <div *ngIf="readonlycontrols" class="form-group" style="margin-bottom: 50px;">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align">Manager Comments</label>
+                                <div class="col-md-6 col-sm-6">
+                                    <textarea name="managerComments" formControlName="managerComments" [readonly]="readonlycontrols" class="form-control" data-validate-length-range="100" [(ngModel)]="Model.managerComments" placeholder="Ex: Continue the process" required="required"></textarea>
+                                </div>
+                                <div class="col-md-3 col-sm-3"></div>
+                            </div>
+                            </div>
+                            &nbsp;
+                            <div class="text-center">
+                                <input type="submit" *ngIf="(Model.requistionId > 0 && Model.status == 'Open') || Model.requistionId == undefined" value="Submit" style="width: 80px;" class="btn btn-primary" />
+                                <button type="button" (click)="HidePopup()" style="width: 80px;" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                            </div>
+                            &nbsp; &nbsp;&nbsp; &nbsp;
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" data-keyboard="false" style="display: none;" data-backdrop="static" id="ManagerModal" role="dialog">
+    <div class="modal-dialog centered">
+        <div class="modal-content">
+            <form class="" action="" method="post" novalidate>
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Comments</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="field item form-group" style="margin-bottom: 50px;">
+                        <label style="margin-top: 10px;" class="col-form-label col-md-3 col-sm-3  label-align">Comments<span
+                            class="required">*</span></label>
+                        <div class="col-md-9 col-sm-9">
+                            <div [ngClass]="{ 'bad' : isSubmitted && !Model.managerComments }">
+                                <textarea name="managercomments" class="form-control" data-validate-length-range="250" [(ngModel)]="Model.managerComments" placeholder="Ex: continue the process" required="required"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" (click)="OnManagerSubmit()" style="width: 80px;" class="btn btn-primary">
+                    Save
+                   </button>
+                    <button type="button" (click)="HideManagerPopup()" style="width: 80px;" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal" data-keyboard="false" style="display: none;" data-backdrop="static" id="RecruiterModal" role="dialog">
+    <div class="modal-dialog centered">
+        <div class="modal-content">
+            <form class="" action="" method="post" novalidate>
+                <div class="modal-header">
+                    <h4 class="modal-title">Assign Recruiters</h4>
+                    <button type="button" class="close" (click)="HideRecruiterPopup()">&times;</button>
+                </div>
+                <div class="modal-body" style="height: 140px;">
+                    <div class="field item form-group" style="margin-bottom: 50px;">
+                        <label style="margin-top: 10px;" class="col-form-label col-md-3 col-sm-3  label-align">Recruiters<span
+                            class="required">*</span></label>
+                        <div class="col-md-9 col-sm-9">
+                            <div [ngClass]="{ 'bad' : isSubmitted && (!Model.TblRequisitionRecruiterMapping ||  Model.TblRequisitionRecruiterMapping.length == 0) }">
+                                <ng-multiselect-dropdown name="recruiters" [placeholder]="'Recruiters'" [data]="EmployeeList" [(ngModel)]="Model.TblRequisitionRecruiterMapping" [settings]="EmployeeDropDownSettings">
+                                </ng-multiselect-dropdown>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field item form-group" style="margin-bottom: 50px;">
+                        <label style="margin-top: 10px;" class="col-form-label col-md-3 col-sm-3  label-align">Comments<span
+                            class="required">*</span></label>
+                        <div class="col-md-9 col-sm-9">
+                            <div [ngClass]="{ 'bad' : isSubmitted && !Model.recruiterComment }">
+                                <textarea name="recruiterComment" class="form-control" data-validate-length-range="250" [(ngModel)]="Model.recruiterComment" placeholder="Ex: Database skills highlighted" required="required"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" (click)="OnRecruiterSubmit()" style="width: 80px;" class="btn btn-primary">
+                    Save
+                   </button>
+                    <button type="button" (click)="HideRecruiterPopup()" style="width: 80px;" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal" data-keyboard="false" style="display: none;" data-backdrop="static" id="CancelModal" role="dialog">
+    <div class="modal-dialog centered">
+        <div class="modal-content">
+            <form class="" action="" method="post" novalidate>
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Cancelling Comments</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="field item form-group" style="margin-bottom: 50px;">
+                        <label style="margin-top: 10px;" class="col-form-label col-md-3 col-sm-3  label-align">Comments<span
+                            class="required">*</span></label>
+                        <div class="col-md-9 col-sm-9">
+                            <div [ngClass]="{ 'bad' : isSubmitted && !Model.cancelComments }">
+                                <textarea name="cancelComments" class="form-control" data-validate-length-range="250" [(ngModel)]="Model.cancelComments" placeholder="Ex: Postponed" required="required"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" (click)="OnCancelSubmit()" style="width: 80px;" class="btn btn-primary">
+                    Save
+                   </button>
+                    <button type="button" (click)="HideCancelPopup()" style="width: 80px;" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="spin" *ngIf="loader">
+    <mat-spinner class="custom-spinner-color"></mat-spinner>
+</div>

@@ -1,0 +1,85 @@
+<div class="x_panel">
+    <div class="x_title">
+        &nbsp;
+        <h2>Resume Upload</h2>
+    </div>
+<form [formGroup]="ImportForm" (ngSubmit)="submit()">
+    <div class="form-group" style="margin-bottom: 50px;">
+        <div class="col-md-12 col-sm-12 pull-left">
+            <mat-radio-group aria-label="Select an option">
+                <mat-radio-button name="file"  value="file">Browse a file
+                </mat-radio-button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <mat-radio-button name="folder"  value="folder">Browse a folder
+                </mat-radio-button>
+            </mat-radio-group>
+        </div>  
+    </div>
+    &nbsp;
+    <div class="form-group" style="margin-bottom: 50px;">
+        <div class="row">
+            <div class="col-sm-1"> <label>Upload File</label></div>
+            <div class="col-sm-4"> <input type="text" class="form-control" value="{{this.path}}"> </div>
+            <div class="col-sm-7"> <button class=" btn btn-basic" (click)="Browse()" type="button">Browse</button>
+                <div *ngIf="f.file.touched && f.file.invalid" class="alert alert-danger">
+                    <div *ngIf="f.file.errors.required">File is required.</div>
+                </div>
+            </div>
+        </div>
+    
+        <input style="display: none;" formControlName="file" accept=".doc,.docx,.pdf,.txt" id="file" type="file"
+            class="form-control" (change)="onFileChange($event)">
+    </div>
+   
+      
+    <div class="form-group" style="margin-bottom: 50px;">
+        <div class="col-sm-1 "> <label >Source</label></div>
+        <!-- <label class="col-form-label col-md-2 col-sm-3 label-align">Source</label> -->
+        <div class=" col-sm-4">
+            <select name="source" (change)="onChange($event)" formControlName="sourceId"  [(ngModel)]="Model.sourceId" class="form-control select2" type="text">
+        
+                <option selected value="1">Direct</option>
+                <option value="2">Vendor</option>
+                <option value="3">Portal</option>
+                <option value="4">Internal</option>
+            </select>
+        </div>
+    
+        <div *ngIf="selectedType == '2'">
+          <label class="col-form-label col-md-2 col-sm-3 label-align">Select Vendor<span
+            class="required">*</span></label>
+            <div class="col-md-4 col-sm-3">
+                    <select name="vend" class="form-control" formControlName="vendorId"  [(ngModel)]="Model.vendorId" placeholder="Ex:Mysore" required="required">                                   
+                        <option *ngFor="let vendor of VendorList" [value]="vendor.vendorId">{{vendor.vendorName}}</option>
+                    </select> 
+                <div class="col-md-3 col-sm-3"></div>
+            </div> 
+        </div> 
+        
+        <div *ngIf="selectedType == '3'" >
+            <label class="col-form-label col-md-2 col-sm-3 label-align">Select JobPortal<span
+                class="required">*</span></label>
+                <div class="col-md-4 col-sm-3">
+                    <select name="portal" class="form-control"  formControlName="portalId" [(ngModel)]="Model.portalId"  placeholder="Ex:Mysore" required="required">                                   
+                        <option *ngFor="let portal of JobPortalList" [value]="portal.portalId">{{portal.portalName}}</option>
+                    </select> 
+                    <div class="col-md-3 col-sm-3"></div>
+                </div> 
+        </div> 
+        <div *ngIf="selectedType == '4'">
+            <label class="col-form-label col-md-2 col-sm-3 label-align">Select Internal<span
+                class="required">*</span></label>
+                <div class="col-md-4 col-sm-3">
+                    <input name="internal" type="text" class="form-control" formControlName="employeeEmailId" [(ngModel)]="Model.employeeEmailId" id="employeeEmailId" placeholder="Ex:Ramesh@gmail.com">
+                    <div class="col-md-3 col-sm-3"></div>
+                </div>
+        </div>
+    </div>
+    &nbsp;
+<div class="text-center">
+    <span style="margin-left:100px;"><button class="btn btn-primary" type="submit">Submit</button>
+    </span>
+</div>
+  
+</form>
+</div>

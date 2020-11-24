@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecruitmentManagementAPI", "RecruitmentManagementAPI.csproj", "{F24E11FA-9D10-408F-9F76-F3C32E936BB2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecruitmentManagementDataAccess", "..\RecruitmentManagementDataAccess\RecruitmentManagementDataAccess.csproj", "{C94C989C-43D3-4190-B676-D363E306CDC3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecruitmentManagementProvider", "..\RecruitmentManagementProvider\RecruitmentManagementProvider.csproj", "{BB544F55-9B9D-4166-9777-B430A73378F4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F24E11FA-9D10-408F-9F76-F3C32E936BB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F24E11FA-9D10-408F-9F76-F3C32E936BB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F24E11FA-9D10-408F-9F76-F3C32E936BB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F24E11FA-9D10-408F-9F76-F3C32E936BB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C94C989C-43D3-4190-B676-D363E306CDC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C94C989C-43D3-4190-B676-D363E306CDC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C94C989C-43D3-4190-B676-D363E306CDC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C94C989C-43D3-4190-B676-D363E306CDC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB544F55-9B9D-4166-9777-B430A73378F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB544F55-9B9D-4166-9777-B430A73378F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB544F55-9B9D-4166-9777-B430A73378F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB544F55-9B9D-4166-9777-B430A73378F4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0B999EA9-32E2-452C-8A60-BE0EF3AA852D}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://internet.ecanarys.com:8080/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = RecruitmentManagementAPI.csproj
+		SccLocalPath1 = .
+		SccProjectUniqueName2 = ..\\RecruitmentManagementDataAccess\\RecruitmentManagementDataAccess.csproj
+		SccProjectName2 = ../RecruitmentManagementDataAccess
+		SccLocalPath2 = ..\\RecruitmentManagementDataAccess
+		SccProjectUniqueName3 = ..\\RecruitmentManagementProvider\\RecruitmentManagementProvider.csproj
+		SccProjectName3 = ../RecruitmentManagementProvider
+		SccLocalPath3 = ..\\RecruitmentManagementProvider
+	EndGlobalSection
+EndGlobal

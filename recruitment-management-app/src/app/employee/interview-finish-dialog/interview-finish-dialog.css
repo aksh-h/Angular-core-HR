@@ -1,0 +1,73 @@
+.x_panel {
+    position: relative;
+}
+
+.mat-dialog-container {
+    width: 500px !important;
+    height: 200px !important;
+    padding: 30px !important;
+    border-radius: 1px !important;
+    text-align: center !important;
+    border-radius: 0px !important;
+}
+
+.blink {
+    text-align: center;
+}
+
+span {
+    color: green;
+    animation: blink 1s linear infinite;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: .5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+table {
+    font-family: arial, sans-serif;
+    width: 100%;
+}
+
+td,
+th {
+    width: 345px;
+    padding: 8px;
+}
+
+th {
+    padding-left: 42px;
+}
+
+.x_content {
+    margin-left: 18px;
+}
+
+.x_panel {
+    border: 0px solid #E6E9ED !important;
+}
+
+hr {
+    margin-top: 1px;
+    margin-bottom: 7px;
+    border: 0;
+    border-top: 1px solid #eee;
+}
+
+.radiobad {
+    border: 1px solid #CE5454!important;
+    box-shadow: 0 0 4px -2px #CE5454;
+    position: relative;
+    left: 0;
+    padding: 3px;
+    -moz-animation: .7s 1 shake linear;
+    -webkit-animation: .7s 1 shake linear;
+}
